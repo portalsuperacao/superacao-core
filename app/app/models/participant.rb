@@ -11,5 +11,14 @@
 #
 
 class Participant < ApplicationRecord
-  validates :uid, uniqueness: true
+  validates :uid, uniqueness: true, allow_nil: false
+
+  has_one :activation_code
+
+  after_create :generate_activation_code
+
+  private
+    def generate_activation_code
+      ActivationCode.create(participant:self)
+    end
 end
