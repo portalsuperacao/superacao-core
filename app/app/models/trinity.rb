@@ -14,4 +14,11 @@ class Trinity < ApplicationRecord
   belongs_to :overcomer
   belongs_to :angel
   belongs_to :archangel
+
+  before_validation :trinity_constraints
+
+  private
+    def trinity_constraints
+      
+    end
 end

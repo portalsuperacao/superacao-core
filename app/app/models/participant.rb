@@ -11,4 +11,5 @@
 #
 
 class Participant < ApplicationRecord
+  validates :uid, uniqueness: true
 end
