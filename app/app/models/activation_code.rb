@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: activation_codes
+#
+#  id             :integer          not null, primary key
+#  code           :string(255)
+#  activated      :boolean
+#  activated_at   :date
+#  participant_id :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 class ActivationCode < ApplicationRecord
    belongs_to :participant
 

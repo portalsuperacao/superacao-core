@@ -2,12 +2,12 @@
 #
 # Table name: trinities
 #
-#  id             :integer          not null, primary key
-#  participant_id :integer
-#  angel_id       :integer
-#  archangel_id   :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id           :integer          not null, primary key
+#  overcomer_id :integer
+#  angel_id     :integer
+#  archangel_id :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 
 class Trinity < ApplicationRecord
