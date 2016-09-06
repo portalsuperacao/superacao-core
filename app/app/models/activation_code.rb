@@ -12,11 +12,10 @@
 #
 
 class ActivationCode < ApplicationRecord
-   belongs_to :participant
+  before_validation :generate_code
+  belongs_to :participant
 
-   validates :code, uniqueness: true
-
-   before_validation :generate_code
+  validates :code, uniqueness: true
 
    private
     def generate_code

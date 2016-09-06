@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20160818030901) do
 
-  create_table "activation_codes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "activation_codes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "code"
     t.boolean  "activated"
     t.date     "activated_at"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20160818030901) do
     t.index ["participant_id"], name: "index_activation_codes_on_participant_id", using: :btree
   end
 
-  create_table "participants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "participants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.string   "uid"
     t.string   "type"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20160818030901) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "trinities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "trinities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "overcomer_id"
     t.integer  "angel_id"
     t.integer  "archangel_id"
