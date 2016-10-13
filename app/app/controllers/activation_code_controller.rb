@@ -13,7 +13,6 @@ class ActivationCodeController < BaseController
            activation_code.save
 
            participant = activation_code.participant
-           puts "UID: #{jwt_service.uid}"
            participant.uid = jwt_service.uid
            participant.save!
 
