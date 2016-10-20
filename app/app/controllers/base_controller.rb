@@ -4,15 +4,17 @@ class BaseController < ApplicationController
   before_action :destroy_session
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  #rescue_from ActiveRecord::RecordInvalid, with: :validation
+  rescue_from ActiveRecord::RecordInvalid, with: :validation
 
   def not_found
     return api_error(status: 404, errors: 'Not found')
   end
 
-  # def validation(e)
-  #   return api_error(status: 422, errors: e.record.errors)
-  # end
+  def validation(e)
+    if Rails.env.development?
+      return api_error(status: 422, errors: e.record.errors)
+    end
+  end
 
   def destroy_session
     request.session_options[:skip] = true
@@ -28,12 +30,13 @@ class BaseController < ApplicationController
   end
 
   private
-    def authenticate(options)
+    def authenticate
       begin
         jwt_service = JWTAuthService.new(request.env['HTTP_AUTHORIZATION'])
-        jwt_service.authenticate(options)
+        jwt_service.authenticate
 
         @current_user = jwt_service.current_user
+        @current_uid  = jwt_service.uid
       rescue Exception => e
         logger.error("Failed to verify jwt due to: '#{e.message}'")
         api_error(status: 401)

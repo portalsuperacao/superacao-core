@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Generate Token</title>
+  <meta charset="utf-8">
+</head>
+
+<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAnTqOEZHBU-1CMx0fKY2v4zFeGvPnvA1I",
+    authDomain: "superacao-dc62e.firebaseapp.com",
+    databaseURL: "https://superacao-dc62e.firebaseio.com",
+    storageBucket: "superacao-dc62e.appspot.com",
+  };
+  firebase.initializeApp(config);
+
+
+  // =============================================================================
+
+  function facebookLogin() {
+    var provider = new firebase.auth.FacebookAuthProvider();
+
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+        console.log(result);
+
+        firebase.auth().currentUser.getToken(true).then(function(idToken) {
+          console.log(idToken);
+        }).catch(function(error) {
+          console.log(error);
+        });
+        
+        // ...
+      }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        console.log(error);
+        // ...
+    });
+
+  }
+
+  /*firebase.auth().currentUser.getToken(true).then(function(idToken) {
+    console.log(idToken);
+  }).catch(function(error) {
+  // Handle error
+  });*/
+
+
+</script>
+
+<body>
+  <button onclick="facebookLogin()"> Login Facebook / Gerar Token </button>
+</body>
+
+
+</html>

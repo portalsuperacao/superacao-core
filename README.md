@@ -3,6 +3,19 @@
 App para fornecer gestão dos trios para o programa **Anjos do Superação** e
 demais funções administrativas para o Portal Superação.
 
+# API
+
+## Código de ativação:
+
+- GET: /activate
+  - Para obter um código de ativação válido, entre no container RoR e pegue um código ainda não usado, via:
+
+  ```
+    $ rails c # console Rails
+    $ ActivationCode.all[0] # primeiro elemento (use o atributo 'code')
+
+  ```
+
 # Environments
 
 ## Dev
@@ -21,4 +34,5 @@ $ docker exec -it <container-id> bash # para obter bash da instância
 $ docker exec -it <container-mysql> bash
 $ rake db:create
 $ rake db:migrate
+$ rake db:seed
 ```
