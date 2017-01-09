@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'trinities' => 'participants#trinities'
   end
 
+  get 'firebase_token' => 'tokens#firebase_token'
   post 'activate' => 'activation_code#activate'
 
   root to: "home#index"

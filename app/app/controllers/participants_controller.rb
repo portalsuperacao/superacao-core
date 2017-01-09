@@ -10,4 +10,9 @@ class ParticipantsController < BaseController
 
     render :json, participant.trinities
   end
+
+  def firebase_token
+    render plain: "ok"
+    # render template: "tmp/firebase_token.html.erb"
+  end
 end
