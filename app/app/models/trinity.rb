@@ -15,10 +15,15 @@ class Trinity < ApplicationRecord
   belongs_to :angel
   belongs_to :archangel
 
-  before_validation :trinity_constraints
+  enum status: { active: 0, archived: 1 }
+
+  validate :single_trinity_per_overcomer
 
   private
-    def trinity_constraints
-      
+    def single_trinity_per_overcomer
+        if Trinity.exists?(status: :active,
+                        overcomer_id: self.overcomer_id)
+          errors.add(:trinity, "Already exists a trinity for this Overcomer.")
+        end
     end
 end

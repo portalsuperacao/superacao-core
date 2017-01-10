@@ -6,6 +6,11 @@ Rails.application.routes.draw do
     get 'trinities' => 'participants#trinities'
   end
 
+  scope '/trinities' do
+      get '/' => "trinities#index"      
+      post '/custom-match' => "trinities#custom_match"
+  end
+
   get 'firebase_token' => 'tokens#firebase_token'
   post 'activate' => 'activation_code#activate'
 

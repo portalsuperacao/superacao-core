@@ -1,5 +1,13 @@
 class ParticipantsController < BaseController
-  before_action :authenticate
+  before_action :authenticate, only: :trinities
+
+  def index
+    if params[:type]
+      render json: Participant.where(type: params[:type]).page(params[:page])
+    else
+      render json: Participant.all.page(params[:page])
+    end
+  end
 
   def trinities
     unless @current_user

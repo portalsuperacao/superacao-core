@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161030164241) do
+ActiveRecord::Schema.define(version: 20170110150828) do
 
   create_table "activation_codes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "code"
@@ -34,8 +34,9 @@ ActiveRecord::Schema.define(version: 20161030164241) do
     t.integer  "overcomer_id"
     t.integer  "angel_id"
     t.integer  "archangel_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "status",       default: 0
     t.index ["angel_id"], name: "index_trinities_on_angel_id", using: :btree
     t.index ["archangel_id"], name: "index_trinities_on_archangel_id", using: :btree
     t.index ["overcomer_id"], name: "index_trinities_on_overcomer_id", using: :btree
