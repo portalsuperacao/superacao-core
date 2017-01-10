@@ -22,6 +22,22 @@ ActiveRecord::Schema.define(version: 20170110150828) do
     t.index ["participant_id"], name: "index_activation_codes_on_participant_id", using: :btree
   end
 
+  create_table "mission_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string  "name"
+    t.integer "deadline"
+    t.json    "guidance"
+  end
+
+  create_table "missions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "mission_type_id"
+    t.integer  "trinity_id"
+    t.string   "status",          default: "new", null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["mission_type_id"], name: "index_missions_on_mission_type_id", using: :btree
+    t.index ["trinity_id"], name: "index_missions_on_trinity_id", using: :btree
+  end
+
   create_table "participants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "uid"
