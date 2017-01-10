@@ -17,8 +17,12 @@ class Trinity < ApplicationRecord
 
   before_validation :trinity_constraints
 
+  def missions
+    Mission.where(trinity_id: self.id)
+  end
+  
   private
     def trinity_constraints
-      
+
     end
 end
