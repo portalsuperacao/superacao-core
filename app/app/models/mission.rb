@@ -14,6 +14,12 @@
 
 class Mission < ApplicationRecord
   has_one :mission_type
+  attr_accessor :deadline_date
+  after_create :set_deadline_date
+
+  def set_deadline_date
+    self.deadline_date = self.mission_type.deadline.days.from_now
+  end
 
   def mission_type
     MissionType.find(self.mission_type_id)
