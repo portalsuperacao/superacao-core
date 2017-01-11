@@ -36,3 +36,13 @@ $ rake db:create
 $ rake db:migrate
 $ rake db:seed
 ```
+
+
+### Issues
+
+Problema no carregamento do **guard** devido ao bundler. Executar no container:
+
+```
+bundle_path=$(which bundle)
+sed -i -e "s/activate_bin_path/bin_path/g" $bundle_path
+```

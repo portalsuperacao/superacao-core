@@ -9,6 +9,8 @@ class JWTAuthService
     jwt_token = read_token
     raise 'Token not provided' if jwt_token.strip.empty?
 
+    return @uid = jwt_token.strip if Rails.env.development?
+
     decode_token = decode_token(jwt_token)
     @uid = decode_token.first['sub']
   end
@@ -17,13 +19,9 @@ class JWTAuthService
     @uid != nil
   end
 
-  def current_user
-    participant = Participant.find_by_uid(@uid)
-    raise "Participant not found for uid: #{uid}" if !participant
-  end
-
   private
     def firebase_public_key
+      # TODO: Can public key be cached ???
       uri = URI('https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com')
       public_keys = JSON.parse(Net::HTTP.get(uri))
       public_keys.first[1]
