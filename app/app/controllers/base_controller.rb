@@ -11,7 +11,8 @@ class BaseController < ApplicationController
     return api_error(status: 404, errors: 'Not found')
   end
 
-  def unknow_error
+  def unknow_error(e)
+    Rails.logger.error(e)
     return api_error(status: 520, errors: 'Sorry, something happened on our side.')
   end
 
@@ -27,6 +28,7 @@ class BaseController < ApplicationController
 
   def api_error(status: 500, errors: [])
      unless Rails.env.production?
+       puts errors
        puts errors.full_messages if errors.respond_to? :full_messages
      end
      head status: status and return if errors.empty?
@@ -43,8 +45,8 @@ class BaseController < ApplicationController
         @current_uid  = jwt_service.uid
 
         unless skip_set_current_user
-          participant = Participant.find_by_uid(@uid)
-          raise "Participant not found for uid: #{uid}" if !participant
+          @current_user = Participant.find_by_uid(@current_uid)
+          raise "Participant not found for uid: #{@current_uid}" if !@current_user
         end
       rescue Exception => e
         logger.error("Failed to verify jwt due to: '#{e.message}'")

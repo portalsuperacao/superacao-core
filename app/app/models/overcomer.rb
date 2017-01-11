@@ -14,13 +14,7 @@ class Overcomer < Participant
   has_one :trinity
 
   def trinities
-    single_trinity = self.trinity
-
-    if single_trinity
-      [single_trinity]
-    else
-      single_trinity
-    end
+    [self.trinity]
   end
 
 end
