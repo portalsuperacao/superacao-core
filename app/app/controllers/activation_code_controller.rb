@@ -1,5 +1,5 @@
 class ActivationCodeController < BaseController
-  before_action :authenticate
+  before_action -> {authenticate(skip_set_current_user:true)}
 
   def activate
     activation_code = ActivationCode.find_by_code(params[:code])
