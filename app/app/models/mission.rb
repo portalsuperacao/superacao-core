@@ -13,12 +13,13 @@
 
 
 class Mission < ApplicationRecord
-  has_one :mission_type
-  attr_accessor :deadline_date
-  after_create :set_deadline_date
+  belongs_to :mission_type
+  belongs_to :trinity
+  belongs_to :owner, class_name: "Participant", foreign_key: "participant_id"
 
-  def set_deadline_date
-    self.deadline_date = self.mission_type.deadline.days.from_now
+
+  def deadline_date
+    self.created_at + self.mission_type.deadline.days
   end
 
   def mission_type
