@@ -6,20 +6,17 @@ class TrinitiesController < BaseController
 
   def custom_match
     params.require(:trinity).permit(:overcomer, :angel, :archangel)
-    t = params[:trinity]
 
-    trinity = Trinity.new(overcomer_id: t[:overcomer],
-                          angel_id: t[:angel],
-                          archangel_id: t[:archangel])
+    trinity = Trinity.new(overcomer_id: params[:trinity][:overcomer],
+                          angel_id: params[:trinity][:angel],
+                          archangel_id: params[:trinity][:archangel])
 
     if trinity.valid?
-      if trinity.save
-        render text: "OK"
-      end
+      TrinitiesService.create_custom_match(trinity)
+      render json: trinity, status: 201
     else
       return api_error(status: 422, errors: trinity.errors)
     end
-    # TrinitiesService.create_manual_match(params)
   end
 
 end
