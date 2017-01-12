@@ -9,6 +9,7 @@ class JWTAuthService
     jwt_token = read_token
     raise 'Token not provided' if jwt_token.strip.empty?
 
+    # To accept any string as valid token in the dev
     return @uid = jwt_token.strip if Rails.env.development?
 
     decode_token = decode_token(jwt_token)
