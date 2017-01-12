@@ -1,16 +1,13 @@
 # == Schema Information
 #
-# Table name: participants
+# Table name: cancer_types
 #
 #  id         :integer          not null, primary key
 #  name       :string(255)
-#  uid        :string(255)
-#  type       :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Angel < Participant
-  has_many :trinities
-  has_one :angel_config
+class CancerType < ApplicationRecord
+  belongs_to :cancer_treatment
 end

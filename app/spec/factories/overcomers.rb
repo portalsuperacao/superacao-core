@@ -1,8 +1,6 @@
-require 'faker'
-
 FactoryGirl.define do
   factory :overcomer do
-    name {Faker::Name.name}
-    uid Faker::Number.number(5)
+    name Faker::Name.first_name
+    sequence(:uid, 1) { |n| "overcomer_#{n}" }
   end
 end

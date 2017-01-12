@@ -14,6 +14,8 @@ class Participant < ApplicationRecord
   validates :uid, uniqueness: true, allow_nil: false
 
   has_one :activation_code
+  has_one :participant_profile
+  has_one :treatment_profile  
   has_many :missions
 
   after_create :generate_activation_code
