@@ -20,6 +20,14 @@ class Trinity < ApplicationRecord
 
   validate :single_trinity_per_overcomer
 
+  def missions
+    Mission.where(trinity_id: self.id)
+  end
+
+  def missions
+    Mission.where(trinity_id: self.id)
+  end
+
   private
     def single_trinity_per_overcomer
         if Trinity.exists?(status: :active,
