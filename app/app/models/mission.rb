@@ -19,7 +19,7 @@ class Mission < ApplicationRecord
 
 
   def deadline_date
-    self.created_at + self.mission_type.deadline.days
+    self.created_at.to_date + self.mission_type.deadline.days
   end
 
   def mission_type
