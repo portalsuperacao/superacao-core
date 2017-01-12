@@ -2,15 +2,14 @@
 #
 # Table name: missions
 #
-#  id               :integer          not null, primary key
-#  mission_type_id  :integer not null, foreign key
-#  trinity_id       :integer not null, foreign key
-#  status           :string(255)
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  id              :integer          not null, primary key
+#  mission_type_id :integer
+#  trinity_id      :integer
+#  participant_id  :integer
+#  status          :string(255)      default("new"), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
-
-
 
 class Mission < ApplicationRecord
   belongs_to :mission_type
