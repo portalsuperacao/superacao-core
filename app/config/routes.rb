@@ -16,5 +16,7 @@ Rails.application.routes.draw do
   get 'firebase_token' => 'tokens#firebase_token'
   post 'activate' => 'activation_code#activate'
 
+  get "home/index"
+  get "home/minor"
   root to: "home#index"
 end
