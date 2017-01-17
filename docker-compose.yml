@@ -19,4 +19,7 @@ services:
       - 3306:3306
     image: mysql
     environment:
+      MYSQL_ROOT_HOST: '172.18.0.2'
+      MYSQL_USER: superacao
+      MYSQL_PASSWORD: superacao
       MYSQL_ROOT_PASSWORD: root

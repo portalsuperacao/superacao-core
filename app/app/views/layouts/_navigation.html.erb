@@ -1,0 +1,54 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">Gabriela Besser</strong>
+                            </span> <span class="text-muted text-xs block">Administrador <b class="caret"></b></span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="#">Trocar senha</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    PS+
+                </div>
+            </li>
+            <li class="<%= 'active' if current_page?('/') %>">
+                <%= link_to "/" do %>
+                <i class="fa fa-heart"></i> <span class="nav-label">Anjos do Superação</span>
+                <% end %>
+
+                <ul class="nav nav-second-level collapse">
+                    <li>
+                        <%= link_to 'Participantes', participants_path %>
+                    </li>
+                    <li><a href="#">Trios</a></li>
+                    <li>
+                        <a href="#">Missões <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level collapse">
+                            <li>
+                                <a href="#">Em aberto</a>
+                            </li>
+                            <li>
+                                <a href="#">Arquivo</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="<%= 'active' if current_page?('/admin') %>">
+                <%= link_to "/" do %>
+                <i class="fa fa-gear"></i> <span class="nav-label">Admin</span>
+                <% end %>
+            </li>
+
+        </ul>
+
+    </div>
+</nav>
