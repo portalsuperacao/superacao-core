@@ -3,9 +3,9 @@ class ParticipantsController < BaseController
 
   def index
     if params[:type]
-      render json: Participant.where(type: params[:type]).page(params[:page])
+      @participant = Participant.where(type: params[:type]).page(params[:page])
     else
-      render json: Participant.all.page(params[:page])
+      @participant = Participant.all.page(params[:page])
     end
   end
 
