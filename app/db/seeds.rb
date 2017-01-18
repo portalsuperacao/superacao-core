@@ -14,6 +14,14 @@
   if n == 1 or n % 10
     archangel = Archangel.create(name: Faker::Name.name, uid: "#{n}_ar")
   end
+  overcomer.build_participant_profile(city: Faker::Address.city, state: Faker::Address.state)
+  overcomer.save
+  angel.build_participant_profile(city: Faker::Address.city, state: Faker::Address.state)
+  angel.save
+  archangel.build_participant_profile(city: Faker::Address.city, state: Faker::Address.state)
+  archangel.save
 
-  Trinity.create(overcomer: overcomer, angel: angel, archangel: archangel)
+  t = Trinity.create(overcomer: overcomer, angel: angel, archangel: archangel)
+
+  puts "Created: #{t}"
 end

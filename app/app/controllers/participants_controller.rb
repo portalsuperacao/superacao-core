@@ -3,9 +3,9 @@ class ParticipantsController < BaseController
 
   def index
     if params[:type]
-      @participant = Participant.where(type: params[:type]).page(params[:page])
+      @participants = Participant.where(type: params[:type]).page(params[:page])
     else
-      @participant = Participant.all.page(params[:page])
+      @participants = Participant.all.page(params[:page])
     end
   end
 
