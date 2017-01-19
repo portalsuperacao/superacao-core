@@ -5,7 +5,7 @@
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 10px;
   font-weight: 600;
-  padding: 3px 8px;
+  padding: 5px 8px;
   text-shadow: none;
 }
 
@@ -64,4 +64,8 @@
 .label-white, .badge-disable {
   background-color: #2A2E36;
   color: #8B91A0;
+}
+
+.label-margin-sm {
+  margin: 0px 3px 0px 3px;
 }

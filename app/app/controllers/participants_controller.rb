@@ -9,6 +9,10 @@ class ParticipantsController < BaseController
     end
   end
 
+  def show
+    @participant = Participant.find(params[:id])
+  end
+
   # APP  endpoints
   def trinities
     render json: @current_user.trinities, include: 'overcomer,angel,archangel'

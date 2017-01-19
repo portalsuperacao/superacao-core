@@ -1,17 +1,4 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-sm-4">
-        <h2>Participantes</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a href="index.html">Anjos do Superação</a>
-            </li>
-            <li class="active">
-                <strong>Participantes</strong>
-            </li>
-        </ol>
-    </div>
-</div>
-
+<%= render 'shared/subheader', headline: 'Participantes', levels: ['Anjos do Superação, Participantes'] %>
 
 <div class="wrapper wrapper-content  animated fadeInRight">
   <div class="row">
@@ -21,7 +8,9 @@
   <div class="ibox-title">
       <h5>Lista de participantes</h5>
       <div class="ibox-tools">
-        <a href="" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Criar Participante</a>
+        <%= link_to '<i class="fa fa-plus"></i> Criar Participante'.html_safe,
+                    new_participant_path,
+                    class: 'btn btn-default btn-sm' %>
       </div>
   </div>
   <div class="ibox-content">
@@ -58,21 +47,21 @@
                       <span class="label label-default"><%= type_label(p.type) %></span>
                   </td>
                   <td class="project-people">
-                    <a href=""><img alt="image" class="img-circle" src="/images/a3.jpg"></a>
+                    <%= link_to image_tag('a3.jpg', class: 'img-circle'), participant_path(p) %>
                   </td>
                   <td class="project-title">
-                      <a href="#"><%= p.name %></a>
+                      <%= link_to p.name, participant_path(p) %>
                       <br/>
                       <small>Desde <%= p.created_at.strftime("%d/%m/%Y") %></small>
                   </td>
                   <td>
                     <%= "#{p.profile.city}, #{p.profile.state}" if p.profile  %>
                   </td>
-                  <td>
-                    3
+                  <td style="text-align:center">
+                    <%=p.trinities.count %>
                   </td>
-                  <td>
-                    5/187
+                  <td style="text-align:center">
+                    <span class="badge badge-<%= missions_alert_level(p.missions.count)%>"><%=p.missions.count %></span>
                   </td>
               </tr>
               <% end %>

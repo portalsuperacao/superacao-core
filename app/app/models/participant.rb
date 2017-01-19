@@ -21,6 +21,10 @@ class Participant < ApplicationRecord
 
   after_create :generate_activation_code
 
+  def name
+    self.profile.name
+  end
+
   private
     def generate_activation_code
       ActivationCode.create(participant:self)
