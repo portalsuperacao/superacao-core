@@ -15,18 +15,11 @@ class Trinity < ApplicationRecord
   belongs_to :overcomer
   belongs_to :angel
   belongs_to :archangel
+  has_many :missions
 
   enum status: { active: 0, archived: 1 }
 
   validate :single_trinity_per_overcomer
-
-  def missions
-    Mission.where(trinity_id: self.id)
-  end
-
-  def missions
-    Mission.where(trinity_id: self.id)
-  end
 
   private
     def single_trinity_per_overcomer

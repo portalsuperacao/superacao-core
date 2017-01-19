@@ -12,16 +12,13 @@
 #
 
 class Mission < ApplicationRecord
+  alias_attribute :partipant, :owner
+  
   belongs_to :mission_type
   belongs_to :trinity
-  belongs_to :owner, class_name: "Participant", foreign_key: "participant_id"
-
+  belongs_to :participant
 
   def deadline_date
     self.created_at.to_date + self.mission_type.deadline.days
-  end
-
-  def mission_type
-    MissionType.find(self.mission_type_id)
   end
 end

@@ -9,8 +9,5 @@
 #
 
 class MissionType < ApplicationRecord
-
-  def missions
-    Mission.where(mission_type_id: self.id)
-  end
+  has_many :missions
 end

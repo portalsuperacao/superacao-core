@@ -4,3 +4,43 @@
     display: none;
   }
 }
+.ibox {
+  .ibox-data-list {
+    padding: 10px;
+    background-color:#fff;
+
+    table {
+      border: 0px solid #fafafa
+    }
+
+    thead {
+      background-color: #f3f6fb
+    }
+  }
+}
+
+.ibox-content img.img-circle, .dropdown-messages-box img.img-circle {
+  width: 38px;
+  height: 38px;
+}
+
+.trinity-list {
+ .avatar-circle {
+   border-radius: 50%;
+   height: 58px;
+   width: 58px;
+  }
+}
+
+.trinity-table {
+  .name {
+    margin-left:65px;
+    margin-top: 20px;
+
+    a {
+      font-weight: 600;
+      color: inherit;
+
+    }
+  }
+}

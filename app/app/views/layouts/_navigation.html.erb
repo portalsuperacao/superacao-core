@@ -19,16 +19,15 @@
                     PS+
                 </div>
             </li>
-            <li class="<%= 'active' if current_page?('/') %>">
+            <li class="<%= 'active' if current_page?('/participants') %>">
                 <%= link_to "/" do %>
                 <i class="fa fa-heart"></i> <span class="nav-label">Anjos do Superação</span>
                 <% end %>
 
-                <ul class="nav nav-second-level collapse">
+                <ul class="nav nav-second-level">
                     <li>
                         <%= link_to 'Participantes', participants_path %>
                     </li>
-                    <li><a href="#">Trios</a></li>
                     <li>
                         <a href="#">Missões <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level collapse">
