@@ -3,25 +3,28 @@
 # Table name: participant_profiles
 #
 #  id             :integer          not null, primary key
-#  first_name     :string(255)
-#  last_name      :string(255)
+#  first_name     :string
+#  last_name      :string
 #  birthdate      :date
-#  occupation     :string(255)
-#  country        :string(255)
-#  state          :string(255)
-#  city           :string(255)
-#  lat            :decimal(10, )
-#  lng            :decimal(10, )
-#  relationship   :string(255)
+#  occupation     :string
+#  country        :string
+#  state          :string
+#  city           :string
+#  lat            :decimal(, )
+#  lng            :decimal(, )
+#  relationship   :string
 #  sons           :integer
-#  facebook       :string(255)
-#  instagram      :string(255)
-#  whatsapp       :string(255)
-#  youtube        :string(255)
-#  snapchat       :string(255)
+#  facebook       :string
+#  instagram      :string
+#  whatsapp       :string
+#  youtube        :string
+#  snapchat       :string
 #  participant_id :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  genre          :integer
+#  email          :string
+#  belief         :string
 #
 
 class ParticipantProfile < ApplicationRecord

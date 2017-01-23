@@ -3,7 +3,7 @@
 # Table name: activation_codes
 #
 #  id             :integer          not null, primary key
-#  code           :string(255)
+#  code           :string
 #  activated      :boolean
 #  activated_at   :date
 #  participant_id :integer

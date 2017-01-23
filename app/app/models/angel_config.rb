@@ -4,7 +4,7 @@
 #
 #  id                   :integer          not null, primary key
 #  supported_overcomers :integer
-#  welcome_message      :text(65535)
+#  welcome_message      :text
 #  angel_id             :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
