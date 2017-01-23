@@ -22,7 +22,6 @@ class ParticipantsController < BaseController
     participant = Object.const_get(pariticipant_type.capitalize).new
     participant_profile = ParticipantProfile.create(participant_profile_params)
     participant.participant_profile = participant_profile
-    participant.name = participant_profile.name
     if participant.save
       redirect_to participants_path, :notice => "Participante criado com sucesso"
     end
