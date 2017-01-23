@@ -1,0 +1,126 @@
+<%= render 'shared/subheader', headline: 'Participantes', levels: ['Anjos do Superação, Participantes'] %>
+
+<div class="wrapper wrapper-content  animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title"><h5>Criar Participante</h5></div>
+        <div class="ibox-content">
+          <%=form_for :participant_profile, url: create_participant_path, :html => {:class=>'from-horizontal'} do |f|%>
+
+            <div class="row form-group">
+              <div class="col-sm-2">
+                <%= f.label :participant_type, "Tipo do participante" %><br/>
+              </div>
+              <div class="col-sm-10">
+                <%= f.radio_button :participant_type, :angel, :checked => true %>
+                <%= f.label :participant_type, "Anjo", :value => "angel"%><br/>
+                <%= f.radio_button :participant_type, :archangel %>
+                <%= f.label :participant_type, "Arcanjo", :value => "archangel"%><br/>
+                <%= f.radio_button :participant_type, :overcomer %>
+                <%= f.label :participant_type, "Superador", :value => "overcomer"%><br/>
+              </div>
+            </div>
+           <div class="hr-line-dashed"></div>
+            <div class="row form-group">
+              <div class="col-sm-2">
+                <%=f.label(:first_name, "Nome", class: "control-label")%>
+              </div>
+              <div class="col-sm-10">
+                <%=f.text_field(:first_name, class: "form-control", :required => true)%>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="row form-group">
+              <div class="col-sm-2">
+                <%=f.label(:last_name, "Sobrenome", class: "control-label")%>
+              </div>
+              <div class="col-sm-10">
+                <%=f.text_field(:last_name, class: "form-control", :required => true)%>
+              </div>
+            </div>
+
+            <div class="hr-line-dashed"></div>
+            <div class="row form-group">
+              <div class="col-sm-2">
+                <%=f.label(:brithdate, "Data de Nascimento", class: "control-label")%>
+              </div>
+              <div class="col-sm-10">
+                <%=f.date_field(:birthdate, class: "form-control", :required => true)%>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="row form-group">
+              <div class="col-sm-2">
+                <%=f.label(:occupation, "Profissão", class: "control-label")%>
+              </div>
+              <div class="col-sm-10">
+                <%=f.text_field(:occupation, class: "form-control")%>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="row form-group">
+              <div class="col-sm-2">
+                <%=f.label(:city, "Cidade", class: "control-label")%>
+              </div>
+              <div class="col-sm-4">
+                <%=f.text_field(:city, class: "form-control")%>
+              </div>
+              <div class="col-sm-1">
+                <%=f.label(:state, "Estado", class: "control-label")%>
+              </div>
+              <div class="col-sm-1">
+                <%=f.text_field(:state, class: "form-control")%>
+              </div>
+              <div class="col-sm-2">
+                <%=f.label(:country, "País", class: "control-label")%>
+              </div>
+              <div class="col-sm-2">
+                <%=f.text_field(:country, class: "form-control")%>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-2">
+                  <%=f.label(:facebook, "Redes Sociais", class: "control-label")%>
+                </div>
+                <div class="col-sm-10">
+                  <%=f.text_field(:facebook, placeholder:"Facebook", class: "form-control")%>
+                </div>
+              </div>
+              <div  class="row">
+                <div class="col-sm-10 col-sm-offset-2">
+                  <%=f.text_field(:instagram, placeholder:"Instagram", class: "form-control")%>
+                </div>
+              </div>
+              <div  class="row">
+                <div class="col-sm-10 col-sm-offset-2">
+                  <%=f.text_field(:whatsapp, placeholder:"Whatsapp", class: "form-control")%>
+                </div>
+              </div>
+              <div  class="row">
+                <div class="col-sm-10 col-sm-offset-2">
+                  <%=f.text_field(:youtube, placeholder:"YouTube", class: "form-control")%>
+                </div>
+              </div>
+              <div  class="row">
+                <div class="col-sm-10 col-sm-offset-2">
+                  <%=f.text_field(:snapchat, placeholder:"Snapchat", class: "form-control")%>
+                </div>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="row form-group">
+              <div class="col-sm-4 col-sm-offset-8">
+                <%= f.submit "Salvar participante", :class =>"btn btn-primary"%>
+                <%= button_tag "Limpar dados", type: :reset, :class =>"btn btn-white" %>
+              </div>
+            </div>
+          <%end%>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -12,7 +12,7 @@
 
 class Participant < ApplicationRecord
   alias_attribute :profile, :participant_profile
-  validates :uid, uniqueness: true, allow_nil: false
+  validates :uid, uniqueness: true, allow_nil: false, if: 'uid.present?'
 
   has_one :activation_code
   has_one :participant_profile
