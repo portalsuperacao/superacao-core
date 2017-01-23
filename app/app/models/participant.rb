@@ -3,7 +3,6 @@
 # Table name: participants
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
 #  uid        :string(255)
 #  type       :string(255)
 #  created_at :datetime         not null
@@ -20,10 +19,6 @@ class Participant < ApplicationRecord
   has_many :missions
 
   after_create :generate_activation_code
-
-  def name
-    self.profile.name
-  end
 
   private
     def generate_activation_code
