@@ -15,11 +15,10 @@ services:
       - ./commons.env
       - ./secrets.env
   db:
+    image: postgres
     ports:
-      - 3306:3306
-    image: mysql
+      - "5432:5432"
     environment:
-      MYSQL_ROOT_HOST: '172.18.0.2'
-      MYSQL_USER: superacao
-      MYSQL_PASSWORD: superacao
-      MYSQL_ROOT_PASSWORD: root
+      POSTGRES_DB: superacao
+      POSTGRES_USER: superacao
+      POSTGRES_PASSWORD: 123456

@@ -2,21 +2,26 @@
 #
 # Table name: participants
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  uid        :string(255)
-#  type       :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id            :integer          not null, primary key
+#  uid           :string
+#  type          :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  pacient       :integer
+#  cancer_status :integer
 #
 
 class Participant < ApplicationRecord
   alias_attribute :profile, :participant_profile
+  enum pacient: [:myself, :family_member]
+  enum cancer_status: [:overcome, :during_treatment]
+
   validates :uid, uniqueness: true, allow_nil: false, if: 'uid.present?'
 
   has_one :activation_code
   has_one :participant_profile
-  has_one :treatment_profile
+  has_one :current_treatment_profile, class_name: 'TreatmentProfile', foreign_key: 'current_participant_id'
+  has_one :past_treatment_profile, class_name: 'TreatmentProfile', foreign_key: 'past_participant_id'
   has_many :missions
 
   after_create :generate_activation_code

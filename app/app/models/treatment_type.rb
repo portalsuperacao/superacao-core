@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: cancer_types
+# Table name: treatment_types
 #
 #  id         :integer          not null, primary key
 #  name       :string
@@ -8,6 +8,6 @@
 #  updated_at :datetime         not null
 #
 
-class CancerType < ApplicationRecord
-  belongs_to :cancer_treatment
+class TreatmentType < ApplicationRecord
+  has_many :treatments
 end

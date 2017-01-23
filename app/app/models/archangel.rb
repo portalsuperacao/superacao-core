@@ -2,12 +2,13 @@
 #
 # Table name: participants
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  uid        :string(255)
-#  type       :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id            :integer          not null, primary key
+#  uid           :string
+#  type          :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  pacient       :integer
+#  cancer_status :integer
 #
 
 class Archangel < Participant

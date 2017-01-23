@@ -6,7 +6,7 @@
 #  mission_type_id :integer
 #  trinity_id      :integer
 #  participant_id  :integer
-#  status          :string(255)      default("new"), not null
+#  status          :string           default("new"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

@@ -4,7 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  cancer_type_id :integer
-#  cancerous_type :string(255)
+#  cancerous_type :string
 #  cancerous_id   :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
