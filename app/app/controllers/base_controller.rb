@@ -3,25 +3,6 @@ class BaseController < ApplicationController
 
   before_action :destroy_session
 
-  rescue_from Exception, with: :unknow_error
-  rescue_from ActiveRecord::RecordInvalid, with: :validation
-  rescue_from ActiveRecord::RecordInvalid, with: :validation
-
-  def not_found
-    return api_error(status: 404, errors: 'Not found')
-  end
-
-  def unknow_error(e)
-    Rails.logger.error(e)
-    return api_error(status: 520, errors: 'Sorry, something happened on our side.')
-  end
-
-  def validation(e)
-    if Rails.env.development?
-      return api_error(status: 422, errors: e.record.errors)
-    end
-  end
-
   def destroy_session
     request.session_options[:skip] = true
   end
