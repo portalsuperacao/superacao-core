@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   scope '/participant' do
     get 'trinities' => 'participants#trinities'
+    post 'create_participant' => 'participants#create'
   end
 
   scope '/trinities' do

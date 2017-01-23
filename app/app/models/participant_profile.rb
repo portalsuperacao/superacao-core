@@ -26,6 +26,9 @@
 
 class ParticipantProfile < ApplicationRecord
 
+belongs_to :participant
+
+attr_accessor :participant_type
 
   def name
     "#{first_name} #{last_name}"
