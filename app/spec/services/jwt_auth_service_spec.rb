@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe JWTAuthService do
-
-  include AuthHelper
   before(:each) do
     jwt_authentication
   end

@@ -4,22 +4,18 @@ Rails.application.routes.draw do
 
   resources :participants, only: [:index, :new, :create, :show, :update, :destroy] do
     resources :trinities, only: [:index, :new, :create, :show, :update, :destroy] do
-      get  'trinities' => 'participants#trinities'
-      post 'custom-match' => "trinities#custom_match"
+      get  'trinities',    to: 'participants#trinities'
+      post 'custom-match', to: "trinities#custom_match"
     end
 
   end
 
   resource :participant, only: [:show] do
-    post 'activate'  => 'activation_code#activate'
-  end
-
-  scope '/participant' do
-    post 'create_participant' => 'participants#create'
+    post 'activate' , to: 'activation_code#activate'
   end
 
   # Not for production
-  get 'firebase_token' => 'tokens#firebase_token'
+  get 'firebase_token', to: 'tokens#firebase_token'
 
   root to: "home#index"
 end

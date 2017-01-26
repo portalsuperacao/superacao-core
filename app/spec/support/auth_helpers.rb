@@ -1,4 +1,4 @@
-module AuthHelper
+module AuthHelpers
   def jwt_authentication
     payload = {data: 'test',
                sub: 'fake-uid-id',

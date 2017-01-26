@@ -1,8 +1,6 @@
 require "rails_helper"
 
-describe ActivationCodeController, :type => :controller do
-
-  include AuthHelper
+describe ActivationCodeController, type: :controller do
   before(:each) do
     jwt_authentication
   end

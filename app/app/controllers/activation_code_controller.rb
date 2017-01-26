@@ -1,5 +1,5 @@
 class ActivationCodeController < BaseController
-  before_action -> {authenticate(skip_set_current_user:true)}
+  before_action {authenticate(skip_set_current_user:true)}
 
   def activate
     activation_code = ActivationCode.find_by_code(params[:code])
@@ -16,10 +16,10 @@ class ActivationCodeController < BaseController
 
          render json: participant
        else
-         api_error(status: :unprocessable_entity, errors: {failed: ['Activation code already used']})
+         render status: :unprocessable_entity, json: {failed: ['Activation code already used']}
        end
     else
-       api_error(status: :not_found, errors: {failed: ['Activation code not found']})
+       render status: :not_found, json: {failed: ['Activation code not found']}
     end
   end
 end
