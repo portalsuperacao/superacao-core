@@ -2,10 +2,15 @@ class ParticipantsController < BaseController
   before_action :authenticate, only: :trinities
 
   def index
+    @participants = Participant.joins(:participant_profile)
+                               .left_outer_joins(:missions)
+                               .distinct().select('participants.*, participant_profiles.*, COUNT(missions.*) as missions_count')
+                               .group('participants.id, participant_profiles.id ')
+                               .page(params[:page])
+                               .order(created_at: :desc)
+
     if params[:type]
-      @participants = Participant.where(type: params[:type]).includes(:participant_profile).page(params[:page])
-    else
-      @participants = Participant.all.includes(:participant_profile).page(params[:page])
+      @participants = @participants.where(type: params[:type].camelize)
     end
   end
 
