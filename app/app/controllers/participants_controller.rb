@@ -16,6 +16,7 @@ class ParticipantsController < BaseController
 
   def show
     @participant = Participant.find(params[:id])
+    @profile = @participant.profile
   end
 
   def new

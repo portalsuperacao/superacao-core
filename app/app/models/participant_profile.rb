@@ -29,6 +29,8 @@
 
 class ParticipantProfile < ApplicationRecord
 
+enum genre: [:male, :female, :other]
+
 belongs_to :participant, optional: true
 
 attr_accessor :participant_type
