@@ -45,7 +45,7 @@
                     <%= link_to image_tag('a3.jpg', class: 'img-circle'), participant_path(p) %>
                   </td>
                   <td class="project-title">
-                      <%= link_to p.name, participant_path(p) %>
+                      <%= link_to p.profile.first_name, participant_path(p) %>
                       <br/>
                       <small>Desde <%= p.created_at.strftime("%d/%m/%Y") %></small>
                   </td>
@@ -56,7 +56,7 @@
                     <%=p.trinities.count %>
                   </td>
                   <td style="text-align:center">
-                    <span class="badge badge-<%= missions_alert_level(p.missions.count)%>"><%=p.missions.count %></span>
+                    <span class="badge badge-<%= missions_alert_level(p.missions_count)%>"><%=p.missions_count %></span>
                   </td>
               </tr>
               <% end %>
