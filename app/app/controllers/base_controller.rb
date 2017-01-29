@@ -7,16 +7,6 @@ class BaseController < ApplicationController
     request.session_options[:skip] = true
   end
 
-  def api_error(status: 500, errors: [])
-     unless Rails.env.production?
-       puts errors
-       puts errors.full_messages if errors.respond_to? :full_messages
-     end
-     head status: status and return if errors.empty?
-
-     render json: errors, status: status
-  end
-
   private
     def authenticate(skip_set_current_user = false)
       begin
@@ -31,7 +21,7 @@ class BaseController < ApplicationController
         end
       rescue Exception => e
         logger.error("Failed to verify jwt due to: '#{e.message}'")
-        api_error(status: 401)
+        head :unauthorized
       end
     end
 end

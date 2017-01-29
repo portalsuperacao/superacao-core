@@ -9,11 +9,8 @@ class JWTAuthService
     jwt_token = read_token
     raise 'Token not provided' if jwt_token.strip.empty?
 
-    # To accept any string as valid token in the dev
-    return @uid = jwt_token.strip if Rails.env.development?
-
-    decode_token = decode_token(jwt_token)
-    @uid = decode_token.first['sub']
+    decoded_token = decode_token(jwt_token)
+    @uid = decoded_token.first['sub']
   end
 
   def authenticated?
@@ -22,7 +19,7 @@ class JWTAuthService
 
   private
     def firebase_public_key
-      # TODO: Can public key be cached ???
+      # TODO: Implement cache control based on value of max-age
       uri = URI('https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com')
       public_keys = JSON.parse(Net::HTTP.get(uri))
       public_keys.first[1]
@@ -33,7 +30,8 @@ class JWTAuthService
     end
 
     def decode_token(jwt_token)
-      x509 = OpenSSL::X509::Certificate.new(firebase_public_key)
+      x509 = OpenSSL::X509::Certificate.new firebase_public_key
+
       # TODO: Implement verification for aud, iss
       JWT.decode(jwt_token.strip, x509.public_key, true, { algorithm: "RS256", verify_iat: true })
     end

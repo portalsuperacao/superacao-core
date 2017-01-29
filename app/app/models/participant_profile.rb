@@ -29,7 +29,7 @@
 
 class ParticipantProfile < ApplicationRecord
 
-belongs_to :participant
+belongs_to :participant, optional: true
 
 attr_accessor :participant_type
 
