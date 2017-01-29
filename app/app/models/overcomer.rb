@@ -13,7 +13,7 @@
 
 class Overcomer < Participant
   has_one :trinity
-
+  
   def trinities
     [self.trinity]
   end

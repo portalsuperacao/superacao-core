@@ -1,13 +1,13 @@
 <%= render 'shared/subheader',  headline: 'Participantes',
-                                levels: ['Anjos do Superação', 'Participantes', 'Editar'] %>
+                                levels: ['Anjos do Superação', 'Participantes', 'Perfil'] %>
 
 <div class="wrapper wrapper-content">
   <div class="row">
       <div class="col-lg-5">
         <div class="ibox">
             <div class="ibox-title">
-              <h5>Superador</h5>
-              <span class="label label-primary pull-right">Ativo</span>
+              <h5><%= participant_type @participant %></h5>
+              <!-- <span class="label label-primary pull-right">Ativo</span> -->
             </div>
             <div class="ibox-title">
               <div class="profile-image">
@@ -17,17 +17,21 @@
                   <div class="clearfix">
                       <div>
                           <h2 class="no-margins">
-                              <%= @participant.profile.name %>
+                              <%= @profile.name %>
                           </h2>
-                          <p><i class="fa fa-map-marker"></i> <%= @participant.profile.city %>, <%= @participant.profile.state %></p>
+                          <p><i class="fa fa-map-marker"></i> <%= @profile.city %>, <%= @profile.state %></p>
                           <p><small>
                             Entrou há <%= distance_of_time_in_words(Time.now, @participant.created_at) %>, desde <%= @participant.created_at.strftime('%d.%m.%Y') %>
                           </small></p>
-                          <div class="label label-primary">Paciente</div>
+
+                          <% if angel_or_overcomer @participant %>
+                          <div class="label label-primary"><%= pacient @participant %></div>
+                          <% end %>
                       </div>
                   </div>
               </div>
             </div>
+            <% if angel_or_overcomer @participant %>
             <div class="ibox-data-list">
               <table class="table">
                   <thead>
@@ -39,24 +43,35 @@
                   </thead>
                   <tbody>
                   <tr>
-                      <td style="width:120px;">Em tratamento</td>
-                      <td><span class="label label-danger pull-right">Não</span></td>
+                      <td style="width:120px;">Situação</td>
+                      <td>
+                        <span class="label <% if @participant.during_treatment? %>label-danger<% else%>label-primary<% end%> pull-right">
+                        <%= cancer_status @participant %>
+                      </span>
+                      </td>
+                  </tr>
+                  <% if @participant.during_treatment? %>
+                  <tr>
+                      <td colspan="2">
+                        <i class="fa fa-angle-right"></i> <strong>Câncer neste momento</strong>
+                      </td>
                   </tr>
                   <tr>
                       <td>
                         Tipo câncer
                       </td>
                       <td>
-                        <span class="label label-default pull-right label-margin-sm">Mama</span>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                        Estágio
-                      </td>
-                      <td>
+
+                        <% if @participant.current_treatment_profile.metastasis?  %>
                         <span class="label label-danger pull-right label-margin-sm">Metástase</span>
-                        <span class="label label-warning pull-right label-margin-sm">Reicidiva</span>
+                        <% end %>
+
+                        <% if @participant.current_treatment_profile.relapse?  %>
+                          <span class="label label-warning pull-right label-margin-sm">Reicidiva</span>
+                        <% end %>
+                        <span class="label label-default pull-right label-margin-sm">
+                          <%= @participant.current_treatment_profile.cancer_treatments.first.cancer_type.name %>
+                        </span>
                       </td>
                   </tr>
                   <tr>
@@ -64,64 +79,86 @@
                       Tratamentos
                       </td>
                       <td>
-                      <div class="label label-default label-margin-sm pull-right">Cirurgia</div>
-                      <div class="label label-default label-margin-sm pull-right">Quimioterapia</div>
-                      <div class="label label-default label-margin-sm pull-right">Radioterapia</div>
-                      <div class="label label-default label-margin-sm pull-right">Terapia oral</div>
-                      <div class="label label-default label-margin-sm pull-right">Terapia alvo</div>
-                      <div class="label label-default label-margin-sm pull-right">Terapia naturais</div>
+                        Realizando:
+                        <% @participant.current_treatment_profile.treatments.where(status: :doing).each do |t|  %>
+                          <div class="label label-default label-margin-sm pull-right"><%= t.treatment_type.name %></div>
+                        <% end %>
+                        <hr />
+                        Feitos:
+                        <% @participant.current_treatment_profile.treatments.where(status: :done).each do |t|  %>
+                          <div class="label label-default label-margin-sm pull-right"><%= t.treatment_type.name %></div>
+                        <% end %>
                       </td>
                   </tr>
+                  <% end %>
+
+                  <% unless @participant.past_treatment_profile.blank? %>
+                  <tr>
+                      <td colspan="2">
+                        <i class="fa fa-angle-right"></i> <strong>Câncer no passado</strong>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                        Tipo câncer
+                      </td>
+                      <td>
+                        <span class="label label-default pull-right label-margin-sm">
+                          <%= @participant.past_treatment_profile.cancer_treatments.first.cancer_type.name %>
+                        </span>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                      Tratamentos
+                      </td>
+                      <td>
+                        Feitos:
+                        <% @participant.past_treatment_profile.treatments.each do |t|  %>
+                          <div class="label label-default label-margin-sm pull-right"><%= t.treatment_type.name %></div>
+                        <% end %>
+                      </td>
+                  </tr>
+                  <% end %>
+
                 </tbody>
               </table>
             </div>
+            <% end %>
 
             <div class="ibox-data-list">
               <table class="table">
                   <thead>
                     <tr>
                       <th colspan="2">
-                        <i class="fa fa-angle-right"></i> Perfil do paciente
+                        <i class="fa fa-angle-right"></i> Perfil
                       </th>
                     </tr>
                   </thead>
                   <tbody>
+                  <%
+                  profile_fields = {
+                        email: 'E-mail',
+                        genre: 'Gênero',
+                        belief: 'Crença',
+                        occupation: 'Profissão',
+                        birthdate: 'Aniversário',
+                        relationship: 'Estado civil',
+                        sons: 'Filhos',
+                        facebook: 'Facebook',
+                        instagram: 'Instagram',
+                        whatsapp: 'Whatsapp',
+                        youtube: 'Youtube',
+                        snapchat: 'snapchat'
+
+                  }
+                  profile_fields.each do |field, name|
+                  %>
                   <tr>
-                      <td style="width:120px;">Profissão</td>
-                      <td>Analista de Sistemas</td>
+                      <td style="width:120px;"><%= name %></td>
+                      <td><%= @participant.profile.send(field) %></td>
                   </tr>
-                  <tr>
-                      <td>
-                        Estado Civil
-                      </td>
-                      <td>
-                        Casada
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                        Gênero
-                      </td>
-                      <td>
-                        Feminino
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                        Filhos
-                      </td>
-                      <td>
-                        3
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                        Crença religiosa
-                      </td>
-                      <td>
-                        Ateu
-                      </td>
-                  </tr>
+                  <% end %>
                 </tbody>
               </table>
             </div>
@@ -141,16 +178,18 @@
                       <div class="ibox-content">
 
                           <div class="row">
+
                               <div class="col-lg-12 trinity-list">
                                 <%= link_to '<i class="fa fa-plus"></i> Criar Trio'.html_safe,
                                 '#',
                                 class: 'btn btn-default btn-sm pull-right' %>
+                                <% @participant.active_trinities.each do |trinity|  %>
                                   <table class="table trinity-table margin bottom">
                                       <tbody>
                                         <tr style="background-color: #FAFAFA">
                                           <td colspan="3" align="center">
-                                            <span class="label label-primary pull-left">Ativo</span>
-                                            Trio iniciado em 21.02.2016
+                                            <span class="label label-primary pull-left"><%= t(trinity.status) %></span>
+                                            Trio iniciado em <%= trinity.created_at.strftime("%d.%m.%Y") %>
                                             <div class="pull-right">
                                             <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-comments"></i> </button>
                                           </div>
@@ -160,114 +199,114 @@
                                         <tr>
                                             <td>
                                               <a href="#"><img alt="image" class="avatar-circle pull-left" src="/images/a4.jpg"></a>
-                                              <div class="name"><a href="#" >Michel Bottan</a>
+                                              <div class="name"><%= link_to trinity.overcomer.name, participant_path(trinity.overcomer) %>
                                               <small>Superador</small></div>
                                             </td>
                                             <td>
                                               <a href="#"><img alt="image" class="avatar-circle pull-left" src="/images/a4.jpg"></a>
-                                              <div class="name"><a href="#" >Michel Bottan</a>
+                                              <div class="name"><%= link_to trinity.angel.name, participant_path(trinity.angel) %>
                                               <small>Anjo</small></div>
                                             </td>
                                             <td>
                                               <a href="#"><img alt="image" class="avatar-circle pull-left" src="/images/a4.jpg"></a>
-                                              <div class="name"><a href="#" >Michel Bottan</a>
+                                              <div class="name"><%= link_to trinity.archangel.name, participant_path(trinity.archangel) %>
                                               <small>Arcanjo</small></div>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <!-- <tr>
                                             <td colspan="4" style="padding:0px;">
-
                                               <div class="table-responsive">
-                                                                          <table class="table table-hover issue-tracker">
-                                                                              <tbody>
-                                                                              <tr>
-                                                                                  <td>
-                                                                                      <span class="label label-primary">Added</span>
-                                                                                  </td>
-                                                                                  <td class="issue-info">
-                                                                                      <a href="#">
-                                                                                          MISSAO-23
-                                                                                      </a>
+                                                <table class="table table-hover issue-tracker">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <span class="label label-primary">Added</span>
+                                                        </td>
+                                                        <td class="issue-info">
+                                                            <a href="#">
+                                                                MISSAO-23
+                                                            </a>
 
-                                                                                      <small>
-                                                                                          Sumiço de Anjo
-                                                                                      </small>
-                                                                                  </td>
-                                                                                  <td>
-                                                                                      Adrian Novak
-                                                                                  </td>
-                                                                                  <td>
-                                                                                      12.02.2015 10:00 am
-                                                                                  </td>
-                                                                                  <td>
-                                                                                      <span class="pie" style="display: none;">0.52,1.041</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 14.933563796318165 11.990700825968545 Z" fill="#1ab394"></path><path d="M 8 8 L 14.933563796318165 11.990700825968545 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg>
-                                                                                      2d
-                                                                                  </td>
-                                                                                  <td class="text-right">
-                                                                                      <button class="btn btn-white btn-xs"> Prorrogada</button>
-                                                                                  </td>
-                                                                              </tr>
-                                                                                <tr>
-                                                                                  <td>
-                                                                                      <span class="label label-danger">Bug</span>
-                                                                                  </td>
-                                                                                  <td class="issue-info">
-                                                                                      <a href="#">
-                                                                                          MISSAO-51
-                                                                                      </a>
+                                                            <small>
+                                                                Sumiço de Anjo
+                                                            </small>
+                                                        </td>
+                                                        <td>
+                                                            Adrian Novak
+                                                        </td>
+                                                        <td>
+                                                            12.02.2015 10:00 am
+                                                        </td>
+                                                        <td>
+                                                            <span class="pie" style="display: none;">0.52,1.041</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 14.933563796318165 11.990700825968545 Z" fill="#1ab394"></path><path d="M 8 8 L 14.933563796318165 11.990700825968545 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg>
+                                                            2d
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <button class="btn btn-white btn-xs"> Prorrogada</button>
+                                                        </td>
+                                                    </tr>
+                                                      <tr>
+                                                        <td>
+                                                            <span class="label label-danger">Bug</span>
+                                                        </td>
+                                                        <td class="issue-info">
+                                                            <a href="#">
+                                                                MISSAO-51
+                                                            </a>
 
-                                                                                      <small>
-                                                                                          Denúncia de Anjo
-                                                                                      </small>
-                                                                                  </td>
-                                                                                  <td>
-                                                                                      Alex Ferguson
-                                                                                  </td>
-                                                                                  <td>
-                                                                                      28.11.2015 05:10 pm
-                                                                                  </td>
-                                                                                  <td>
-                                                                                      <span class="pie" style="display: none;">1,2</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 14.92820323027551 11.999999999999998 Z" fill="#1ab394"></path><path d="M 8 8 L 14.92820323027551 11.999999999999998 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg>
-                                                                                      2d
-                                                                                  </td>
-                                                                                  <td class="text-right">
-                                                                                  </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                                  <td>
-                                                                                      <span class="label label-danger">Bug</span>
-                                                                                  </td>
-                                                                                  <td class="issue-info">
-                                                                                      <a href="#">
-                                                                                          MISSAO-52
-                                                                                      </a>
+                                                            <small>
+                                                                Denúncia de Anjo
+                                                            </small>
+                                                        </td>
+                                                        <td>
+                                                            Alex Ferguson
+                                                        </td>
+                                                        <td>
+                                                            28.11.2015 05:10 pm
+                                                        </td>
+                                                        <td>
+                                                            <span class="pie" style="display: none;">1,2</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 14.92820323027551 11.999999999999998 Z" fill="#1ab394"></path><path d="M 8 8 L 14.92820323027551 11.999999999999998 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg>
+                                                            2d
+                                                        </td>
+                                                        <td class="text-right">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span class="label label-danger">Bug</span>
+                                                        </td>
+                                                        <td class="issue-info">
+                                                            <a href="#">
+                                                                MISSAO-52
+                                                            </a>
 
-                                                                                      <small>
-                                                                                          Dúvidas
-                                                                                      </small>
-                                                                                  </td>
-                                                                                  <td>
-                                                                                      Mark Conor
-                                                                                  </td>
-                                                                                  <td>
-                                                                                      18.09.2015 06:20 pm
-                                                                                  </td>
-                                                                                  <td>
-                                                                                      <span class="pie" style="display: none;">3,2</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 1 1 3.297717981660216 14.47213595499958 Z" fill="#1ab394"></path><path d="M 8 8 L 3.297717981660216 14.47213595499958 A 8 8 0 0 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg>
-                                                                                      3d
-                                                                                  </td>
-                                                                                  <td class="text-right">
-                                                                                  </td>
-                                                                              </tr>
-                                                                              </tbody>
-                                                                          </table>
-                                                                          </div>
+                                                            <small>
+                                                                Dúvidas
+                                                            </small>
+                                                        </td>
+                                                        <td>
+                                                            Mark Conor
+                                                        </td>
+                                                        <td>
+                                                            18.09.2015 06:20 pm
+                                                        </td>
+                                                        <td>
+                                                            <span class="pie" style="display: none;">3,2</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 1 1 3.297717981660216 14.47213595499958 Z" fill="#1ab394"></path><path d="M 8 8 L 3.297717981660216 14.47213595499958 A 8 8 0 0 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg>
+                                                            3d
+                                                        </td>
+                                                        <td class="text-right">
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                </div>
                                             </td>
-                                        </tr>
+                                        </tr> -->
                                       </tbody>
                                   </table>
+                                  <% end %>
                               </div>
-                      </div>
+                            </div>
                       </div>
                   </div>
               </div>
