@@ -2,10 +2,8 @@ class ParticipantsController < BaseController
   before_action :authenticate, only: :trinities
 
   def index
-    @participants = Participant.joins(:participant_profile)
-                               .left_outer_joins(:missions)
-                               .distinct().select('participants.*, participant_profiles.*, COUNT(missions.*) as missions_count')
-                               .group('participants.id, participant_profiles.id ')
+    @participants = Participant.joins(:participant_profile).includes(:participant_profile)
+                               .group('participants.id,participant_profiles.id')
                                .page(params[:page])
                                .order(created_at: :desc)
 

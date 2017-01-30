@@ -36,7 +36,9 @@
               </tr>
               </thead>
               <tbody>
-              <% @participants.each do |p| %>
+              <%
+              @participants.each do |p|
+                 %>
               <tr>
                   <td>
                       <span class="label label-default"><%= type_label(p.type) %></span>
@@ -56,7 +58,7 @@
                     <%=p.trinities.count %>
                   </td>
                   <td style="text-align:center">
-                    <span class="badge badge-<%= missions_alert_level(p.missions_count)%>"><%=p.missions_count %></span>
+                    <span class="badge badge-<%= missions_alert_level(p.missions.count)%>"><%=p.missions.count %></span>
                   </td>
               </tr>
               <% end %>
