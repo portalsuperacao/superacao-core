@@ -12,7 +12,7 @@
 #
 
 class Mission < ApplicationRecord
-  alias_attribute :participant, :owner
+  alias_attribute :owner, :participant
 
   belongs_to :mission_type
   belongs_to :trinity
