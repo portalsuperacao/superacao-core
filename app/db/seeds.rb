@@ -103,7 +103,7 @@ angel = nil
     max_overcomers_counter += 1
   end
 
-  if n == 1 or (n % rand(0..n)) == 0
+  if n == 1 or (n % rand(1..n)) == 0
     archangel = Archangel.create(uid: "#{n}_ar")
   end
 
