@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     end
 
   end
-
+  get 'participants/search', to: 'participants#index'
   resource :participant, only: [:show] do
     post 'activate' , to: 'activation_code#activate'
   end

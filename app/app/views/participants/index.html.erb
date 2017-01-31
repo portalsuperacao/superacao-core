@@ -19,8 +19,14 @@
             <%= filters %>
           </div>
           <div class="col-sm-4">
-              <div class="input-group"><input type="text" placeholder="Nome" class="input-sm form-control"> <span class="input-group-btn">
-                                  <button type="button" class="btn btn-sm btn-primary"> Buscar</button> </span></div>
+            <%= form_tag "/participants", method: "get" do %>
+            <div class="input-group">
+              <%=text_field_tag :name, nil, placeholder: "Nome", class: "input-sm form-control"%>
+              <!-- <input type="text" placeholder="Nome" class="input-sm form-control"> -->
+              <span class="input-group-btn"><%= submit_tag "Buscar", class: "btn btn-sm btn-primary"%></span>
+              <!-- <span class="input-group-btn"><button type="button" class="btn btn-sm btn-primary"> Buscar</button></span> -->
+            </div>
+            <%end%>
           </div>
       </div>
       <div class="table-responsive">
