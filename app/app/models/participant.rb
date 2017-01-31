@@ -12,6 +12,8 @@
 #
 
 class Participant < ApplicationRecord
+  include PgSearch
+
   alias_attribute :profile, :participant_profile
   enum pacient: [:myself, :family_member]
   enum cancer_status: [:overcome, :during_treatment]
@@ -24,15 +26,18 @@ class Participant < ApplicationRecord
   has_one :past_treatment_profile, class_name: 'TreatmentProfile', foreign_key: 'past_participant_id'
   has_many :missions
 
+  pg_search_scope :search_by_full_name, :associated_against => {
+    :participant_profile => [:first_name, :last_name]
+  }
   after_create :generate_activation_code
 
   def active_trinities
      Trinity.where("#{self.type.downcase.to_sym}":  self.id, status: :active)
   end
 
-  def profile
-    self.participant_profile
-  end
+  # def profile
+  #   self.participant_profile
+  # end
 
   def name
     self.profile.name

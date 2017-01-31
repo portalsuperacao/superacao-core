@@ -10,6 +10,11 @@ class ParticipantsController < BaseController
     if params[:type]
       @participants = @participants.where(type: params[:type].camelize)
     end
+
+    if params[:name]
+      name = params[:name]
+      # @participants = @participants.find(Participant.search_by_full_name(name))
+    end
   end
 
   def show
