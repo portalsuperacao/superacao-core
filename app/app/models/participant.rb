@@ -26,9 +26,11 @@ class Participant < ApplicationRecord
   has_one :past_treatment_profile, class_name: 'TreatmentProfile', foreign_key: 'past_participant_id'
   has_many :missions
 
-  pg_search_scope :search_by_full_name, :associated_against => {
-    :participant_profile => [:first_name, :last_name]
-  }
+  pg_search_scope :search_by_full_name,
+                  :associated_against => {
+                    :participant_profile => [:first_name, :last_name]},
+                  :using => {:tsearch => {:prefix => true}}
+
   after_create :generate_activation_code
 
   def active_trinities
