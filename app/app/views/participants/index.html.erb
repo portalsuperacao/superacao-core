@@ -52,7 +52,7 @@
                     <%= link_to image_tag('a3.jpg', class: 'img-circle'), participant_path(p) %>
                   </td>
                   <td class="project-title">
-                      <%= link_to p.profile.first_name, participant_path(p) %>
+                      <%= link_to p.profile.name, participant_path(p) %>
                       <br/>
                       <small>Desde <%= p.created_at.strftime("%d/%m/%Y") %></small>
                   </td>
