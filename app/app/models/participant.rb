@@ -37,10 +37,6 @@ class Participant < ApplicationRecord
      Trinity.where("#{self.type.downcase.to_sym}":  self.id, status: :active)
   end
 
-  # def profile
-  #   self.participant_profile
-  # end
-
   def name
     self.profile.name
   end
