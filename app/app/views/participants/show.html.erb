@@ -1,6 +1,26 @@
 <%= render 'shared/subheader',  headline: 'Participantes',
                                 levels: ['Anjos do Superação', 'Participantes', 'Perfil'] %>
 
+<div class="modal fade" id="create-trinity" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">Match Manual</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Salvar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <div class="wrapper wrapper-content">
   <div class="row">
       <div class="col-lg-5">
@@ -180,9 +200,11 @@
                           <div class="row">
 
                               <div class="col-lg-12 trinity-list">
-                                <%= link_to '<i class="fa fa-plus"></i> Criar Trio'.html_safe,
-                                '#',
-                                class: 'btn btn-default btn-sm pull-right' %>
+                                <% if @participant.type == 'Overcomer' %>
+                                <%= button_tag '<i class="fa fa-plus"></i> Criar Trio'.html_safe,
+                                 class: 'btn btn-default btn-sm pull-right', 'data-toggle': "modal",
+                                    'data-target': "#create-trinity" %>
+                                <% end %>
                                 <% @participant.active_trinities.each do |trinity|  %>
                                   <table class="table trinity-table margin bottom">
                                       <tbody>
