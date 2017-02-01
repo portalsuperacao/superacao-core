@@ -22,7 +22,7 @@
             <%= form_tag "/participants", method: "get" do %>
               <div class="input-group">
                 <%= hidden_field_tag(:type, params[:type]) if params[:type] %>
-                <%= text_field_tag :name, nil, placeholder: "Nome", class: "input-sm form-control"%>
+                <%= text_field_tag :name, @name, placeholder: "Nome", class: "input-sm form-control"%>
                 <span class="input-group-btn"><%= submit_tag "Buscar", class: "btn btn-sm btn-primary"%></span>
               </div>
             <%end%>
