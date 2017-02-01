@@ -28,6 +28,11 @@
             <%end%>
           </div>
       </div>
+      <% if @name %>
+        <div class="row">
+          <div class="col-sm-12 m-b-xs"><b>Busca por: </b><%= @name %></div>
+        </div>
+      <% end %>
       <div class="table-responsive">
           <table class="table table-striped">
               <thead>

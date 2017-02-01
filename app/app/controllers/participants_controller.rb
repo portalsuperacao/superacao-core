@@ -6,8 +6,8 @@ class ParticipantsController < BaseController
                                .group('participants.id,participant_profiles.id')
 
    if params[:name]
-     name = params[:name]
-     @participants = Participant.search_by_full_name(name)
+     @name = params[:name]
+     @participants = Participant.search_by_full_name(@name)
    end
 
     if params[:type]
