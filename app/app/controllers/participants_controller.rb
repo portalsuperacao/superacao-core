@@ -4,12 +4,17 @@ class ParticipantsController < BaseController
   def index
     @participants = Participant.joins(:participant_profile).includes(:participant_profile)
                                .group('participants.id,participant_profiles.id')
-                               .page(params[:page])
-                               .order(created_at: :desc)
+
+   if params[:name]
+     @name = params[:name]
+     @participants = Participant.search_by_full_name(@name)
+   end
 
     if params[:type]
       @participants = @participants.where(type: params[:type].camelize)
     end
+    @participants = @participants.page(params[:page])
+    .order(created_at: :desc)
   end
 
   def show
