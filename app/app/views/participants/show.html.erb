@@ -9,17 +9,10 @@
         <h4 class="modal-title" id="gridSystemModalLabel">Match Manual</h4>
       </div>
       <div class="modal-body">
-        <div class="row">
-          <div class="col-md-12"></div>
-        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Salvar</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </div>
+</div>
 
 <div class="wrapper wrapper-content">
   <div class="row">
@@ -44,7 +37,7 @@
                             Entrou há <%= distance_of_time_in_words(Time.now, @participant.created_at) %>, desde <%= @participant.created_at.strftime('%d.%m.%Y') %>
                           </small></p>
 
-                          <% if angel_or_overcomer @participant %>
+                          <% if angel_or_overcomer @participant and ! @profile.blank? %>
                           <div class="label label-primary"><%= pacient @participant %></div>
                           <% end %>
                       </div>
@@ -200,10 +193,10 @@
                           <div class="row">
 
                               <div class="col-lg-12 trinity-list">
-                                <% if @participant.type == 'Overcomer' %>
-                                <%= button_tag '<i class="fa fa-plus"></i> Criar Trio'.html_safe,
-                                 class: 'btn btn-default btn-sm pull-right', 'data-toggle': "modal",
-                                    'data-target': "#create-trinity" %>
+                                <% if @participant.is_overcomer_and_has_no_trinity %>
+                                  <%= link_to '<i class="fa fa-plus"></i> Criar Trio'.html_safe,
+                                    new_participant_trinity_path(@participant),
+                                    class: 'btn btn-default btn-sm pull-right', remote: true %>
                                 <% end %>
                                 <% @participant.active_trinities.each do |trinity|  %>
                                   <table class="table trinity-table margin bottom">

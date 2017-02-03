@@ -11,5 +11,6 @@
  *= require_self
  *= require font-awesome
  *= require animate/animate.css
+ *= require toastr/toastr.min.css
  *= require style
  */

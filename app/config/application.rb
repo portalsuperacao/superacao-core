@@ -13,5 +13,7 @@ module SuperacaoCore
     # -- all .rb files in that directory are automatically loaded.
     config.autoload_paths << Rails.root.join('lib')
     config.autoload_paths += %W(#{config.root}/app/services)
+
+    config.superacao = config_for(:superacao)
   end
 end

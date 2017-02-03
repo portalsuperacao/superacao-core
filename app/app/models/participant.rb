@@ -33,6 +33,12 @@ class Participant < ApplicationRecord
 
   after_create :generate_activation_code
 
+  accepts_nested_attributes_for :participant_profile
+
+  def is_overcomer_and_has_no_trinity
+    self.is_a? Overcomer and !active_trinities.any?
+  end
+
   def active_trinities
      Trinity.where("#{self.type.downcase.to_sym}":  self.id, status: :active)
   end

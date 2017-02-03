@@ -1,0 +1,5 @@
+var content     =   '.modal-body',
+    modal       =   '#create-trinity';
+
+$(modal + ' ' + content).html('<%= j render("new") %>');
+$(modal).modal();
