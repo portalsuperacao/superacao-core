@@ -1,0 +1,11 @@
+
+<strong>Superador:</strong> <%= @participant.name %><hr/>
+
+<%= simple_form_for Trinity.new, url: custom_match_path, method: :post, remote: true do |f| %>
+  <%= f.error_notification %>
+  <%= f.association :overcomer, as: :hidden, input_html: { value: params[:participant_id] }  %>
+  <%= f.association :angel, collection: @angels %>
+  <%= f.association :archangel, collection: @archangels %>
+  <%= f.button :submit, 'Enviar', class: 'btn btn-primary' %>
+  <%= f.button :button, 'Fechar', class: 'btn btn-default', 'data-dismiss' => 'modal' %>
+<% end %>
