@@ -11,7 +11,7 @@
             </div>
             <div class="ibox-title">
               <div class="profile-image">
-                  <img src="/images/a3.jpg" class="img-circle circle-border-gray m-b-md" alt="profile">
+                  <%= image_tag(@participant.avatar.url(:medium), class: 'img-circle circle-border-gray m-b-md') %>
               </div>
               <div class="profile-info">
                   <div class="clearfix">
@@ -198,17 +198,17 @@
 
                                         <tr>
                                             <td>
-                                              <a href="#"><img alt="image" class="avatar-circle pull-left" src="/images/a4.jpg"></a>
+                                              <%= link_to image_tag(trinity.overcomer.avatar.url(:medium), class: 'avatar-circle pull-left'), participant_path(trinity.overcomer) %>
                                               <div class="name"><%= link_to trinity.overcomer.name, participant_path(trinity.overcomer) %>
                                               <small>Superador</small></div>
                                             </td>
                                             <td>
-                                              <a href="#"><img alt="image" class="avatar-circle pull-left" src="/images/a4.jpg"></a>
+                                              <%= link_to image_tag(trinity.angel.avatar.url(:medium), class: 'avatar-circle pull-left'), participant_path(trinity.angel) %>
                                               <div class="name"><%= link_to trinity.angel.name, participant_path(trinity.angel) %>
                                               <small>Anjo</small></div>
                                             </td>
                                             <td>
-                                              <a href="#"><img alt="image" class="avatar-circle pull-left" src="/images/a4.jpg"></a>
+                                              <%= link_to image_tag(trinity.archangel.avatar.url(:medium), class: 'avatar-circle pull-left'), participant_path(trinity.archangel) %>
                                               <div class="name"><%= link_to trinity.archangel.name, participant_path(trinity.archangel) %>
                                               <small>Arcanjo</small></div>
                                             </td>
