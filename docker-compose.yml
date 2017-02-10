@@ -6,7 +6,8 @@ services:
     volumes:
       - ./app:/usr/src/app
     links:
-      - db
+      - postgres
+      - redis
     ports:
       - "3000:3000"
     stdin_open: true
@@ -14,7 +15,7 @@ services:
     env_file:
       - ./commons.env
       - ./secrets.env
-  db:
+  postgres:
     image: postgres
     ports:
       - "5432:5432"
@@ -22,3 +23,17 @@ services:
       POSTGRES_DB: superacao
       POSTGRES_USER: superacao
       POSTGRES_PASSWORD: 123456
+  redis:
+    image: redis:3.0.7
+    ports:
+      - '6379:6379'
+  sidekiq:
+    build: ./app
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    links:
+      - postgres
+      - redis
+    volumes:
+      - ./app:/usr/src/app
+    env_file:
+      - ./commons.env

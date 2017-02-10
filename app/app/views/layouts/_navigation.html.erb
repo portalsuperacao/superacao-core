@@ -19,28 +19,17 @@
                     PS+
                 </div>
             </li>
-            <li class="<%= 'active' if current_page?('/participants') %>">
-                <%= link_to "/" do %>
-                <i class="fa fa-heart"></i> <span class="nav-label">Anjos do Superação</span>
-                <% end %>
-
-                <ul class="nav nav-second-level">
+            <%= active_link_to 'Participantes', participants_path, :wrap_tag => :li %>
+            <li>
+                <a href="#">Missões <span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level collapse">
                     <li>
-                        <%= link_to 'Participantes', participants_path %>
-                    </li>
-                    <li>
-                        <a href="#">Missões <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level collapse">
-                            <li>
-                                <a href="#">Em aberto</a>
-                            </li>
-                            <li>
-                                <a href="#">Arquivo</a>
-                            </li>
-                        </ul>
+                        <a href="#">Alertas</a>
                     </li>
                 </ul>
             </li>
+
+            <%= active_link_to 'Mensagens positivas', positive_messages_path, :wrap_tag => :li %>
             <li class="<%= 'active' if current_page?('/admin') %>">
                 <%= link_to "/" do %>
                 <i class="fa fa-gear"></i> <span class="nav-label">Admin</span>

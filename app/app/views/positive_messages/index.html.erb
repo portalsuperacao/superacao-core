@@ -1,0 +1,19 @@
+<%= render 'shared/subheader', headline: 'Mensagens Positivas', levels: ['Anjos do Superação','Participantes'] %>
+
+<div class="wrapper wrapper-content  animated fadeInRight">
+  <div class="row">
+
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Lista de mensagens</h5>
+            <div class="ibox-tools">
+              <%= link_to '<i class="fa fa-plus"></i> Criar Mensagem'.html_safe,
+                          new_positive_message_path,
+                          class: 'btn btn-default btn-sm' %>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

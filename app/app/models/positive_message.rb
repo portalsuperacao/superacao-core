@@ -1,0 +1,2 @@
+class PositiveMessage < ApplicationRecord
+end
