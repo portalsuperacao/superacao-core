@@ -14,4 +14,26 @@
 class Angel < Participant
   has_many :trinities
   has_one :angel_config
+
+  before_create :build_config
+
+  accepts_nested_attributes_for :angel_config
+
+  scope :available_trinities, -> {
+     joins(:participant_profile,:trinities )
+    .group(:id,'"participant_profiles"."first_name"')
+    .having('count(*) < (SELECT "angel_configs"."supported_overcomers"
+                         FROM "angel_configs"
+                         WHERE "angel_configs"."angel_id" = "participants"."id" )')
+    .order('"participant_profiles"."first_name"')
+  }
+
+  def accepts_one_trinity?
+    self.trinities.count < self.angel_config.supported_overcomers
+  end
+
+  private
+    def build_config
+        build_angel_config
+    end
 end

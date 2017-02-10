@@ -1,0 +1,10 @@
+# Superação App Configs
+production:
+  angel_max_overcomers: 3
+  archangel_max_trinities: 20
+development:
+  angel_max_overcomers: 3
+  archangel_max_trinities: 20
+test:
+  angel_max_overcomers: 3
+  archangel_max_trinities: 20

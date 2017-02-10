@@ -33,6 +33,7 @@ gem 'kaminari'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'pg_search'
 gem "paperclip", "~> 5.0.0"
+gem 'simple_form'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
