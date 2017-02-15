@@ -109,6 +109,8 @@ ActiveRecord::Schema.define(version: 20170210000532) do
 
   create_table "positive_messages", force: :cascade do |t|
     t.string   "name"
+    t.string   "category"
+    t.integer  "uploaded"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"

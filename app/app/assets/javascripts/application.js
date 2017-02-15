@@ -17,4 +17,6 @@
 //= require pace/pace.min.js
 //= require toastr/toastr.min.js
 //= require slimscroll/jquery.slimscroll.min.js
+//= require jasny/jasny-bootstrap.min.js
+//= require sweetalert/sweetalert.min.js
 //= require_tree .

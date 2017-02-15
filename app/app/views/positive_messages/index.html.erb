@@ -1,4 +1,4 @@
-<%= render 'shared/subheader', headline: 'Mensagens Positivas', levels: ['Anjos do Superação','Participantes'] %>
+<%= render 'shared/subheader', headline: 'Mensagem positiva', levels: ['Mensagem positiva'] %>
 
 <div class="wrapper wrapper-content  animated fadeInRight">
   <div class="row">
@@ -13,6 +13,52 @@
                           class: 'btn btn-default btn-sm' %>
             </div>
         </div>
+        <div class="ibox-content">
+          <% if @positive_messages.size > 0 %>
+          <div class="table-responsive">
+              <table class="table table-striped">
+                  <thead>
+                  <tr>
+                      <th style="width:10%"> </th>
+                      <th>Nome </th>
+                      <th>Categoria</th>
+                      <th>Upload imagem (Ativo)</th>
+                      <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <%
+                  @positive_messages.each do |p|
+                     %>
+                  <tr>
+                      <td>
+                          <%= image_tag p.image.url(:thumb) %>
+                      </td>
+                      <td class="project-title">
+                          <%= link_to p.name, positive_message_path(p) %>
+                      </td>
+                      <td>
+                          <%= p.category %>
+                      </td>
+                      <td>
+                          <span class="label <% unless p.uploaded? %>label-danger<% else%>label-primary<% end%>">
+                            <%= p.uploaded? ? 'Sim' : 'Não' %>
+                          </span>
+                      </td>
+                      <td class="text-right">
+                        <%= button_tag '<i class="fa fa-trash"></i> excluir'.html_safe,
+                                    class: 'btn btn-danger btn-xs delete-action',
+                                    data: {action: positive_message_path(p), success_redirect: positive_messages_path } %>
+                      </td>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+              <% end %>
+
+              <%= paginate @positive_messages %>
+            </div>
+          </div>
       </div>
     </div>
   </div>

@@ -12,5 +12,7 @@
  *= require font-awesome
  *= require animate/animate.css
  *= require toastr/toastr.min.css
+ *= require jasny/jasny-bootstrap.min.css
+ *= require sweetalert/sweetalert.css
  *= require style
  */
