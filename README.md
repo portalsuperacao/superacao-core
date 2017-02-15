@@ -1,37 +1,25 @@
 # Superação Core
 
-App para fornecer gestão dos trios para o programa **Anjos do Superação** e
-demais funções administrativas para o Portal Superação.
+This application handles the core elements of the methodology created by the Portal Superação, which provides psychological support to cancer patients during their cancer treatment.
 
-# API
-
-## Código de ativação:
-
-- GET: /activate
-  - Para obter um código de ativação válido, entre no container RoR e pegue um código ainda não usado, via:
-
-  ```
-    $ rails c # console Rails
-    $ ActivationCode.all[0] # primeiro elemento (use o atributo 'code')
-
-  ```
+It handles the matching, management of **overcomer** (patient) with his/her  **angel** (supporter) and support tickets to scale the platform in a self-managed way.
 
 # Environments
 
 ## Dev
 
-### Init containers
+### Docker
 ```
 $ docker-compose build
 $ docker-compose up -d
-$ docker exec -it <container-id> bash # para obter bash da instância
+$ docker exec -it <container-id> bash # to get container bash
 ```
 
-### Init Rails
+### Rails init
 
 
 ```
-$ docker exec -it <container-mysql> bash
+$ docker exec -it <app-container-id> bash
 $ rake db:create
 $ rake db:migrate
 $ rake db:seed
@@ -40,9 +28,13 @@ $ rake db:seed
 
 ### Issues
 
-Problema no carregamento do **guard** devido ao bundler. Executar no container:
+Workaround for running `guard`:
 
 ```
 bundle_path=$(which bundle)
 sed -i -e "s/activate_bin_path/bin_path/g" $bundle_path
 ```
+
+# License
+
+GNU GPL v3.0
