@@ -41,9 +41,7 @@
                           <%= p.category %>
                       </td>
                       <td>
-                          <span class="label <% unless p.uploaded? %>label-danger<% else%>label-primary<% end%>">
-                            <%= p.uploaded? ? 'Sim' : 'Não' %>
-                          </span>
+                          <%= label_yes_no p.uploaded? %>
                       </td>
                       <td class="text-right">
                         <%= button_tag '<i class="fa fa-trash"></i> excluir'.html_safe,
