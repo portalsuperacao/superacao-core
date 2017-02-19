@@ -1,0 +1,32 @@
+<div class="row">
+
+  <div class="col-lg-8 b-r">
+    <%= simple_form_for @positive_message, html: {multipart: true} do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :name  %>
+      <%= f.input :category, collection: ['Religiosa','Força','Esperança','Saudações','Amizade']  %>
+      <div class="form-group <%= 'has-error' if @positive_message.errors.include? :image%>">
+        <%= f.label :image, class: 'control-label'  %>
+        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+            <div class="form-control" data-trigger="fileinput">
+                <i class="glyphicon glyphicon-file fileinput-exists"></i>
+            <span class="fileinput-filename"></span>
+            </div>
+            <span class="input-group-addon btn btn-default btn-file">
+                <span class="fileinput-new">Selecione arquivo</span>
+                <span class="fileinput-exists">Trocar</span>
+                <%= f.file_field :image, error_html: {blank: 'blank_error'}  %>
+            </span>
+            <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remover</a>
+        </div>
+        <%= f.error :image, :blank => "blank_error" %>
+      </div>
+      <%= f.button :submit, 'Enviar', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+  <div class="col-lg-4">
+    <% if @positive_message.image.exists? %>
+      <%= image_tag @positive_message.image.url(:large) %>
+    <% end %>
+  </div>
+</div>

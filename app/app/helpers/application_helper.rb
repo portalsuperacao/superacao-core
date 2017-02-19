@@ -13,4 +13,9 @@ module ApplicationHelper
       return 'default'
     end
   end
+
+  def label_yes_no(value = false)
+    return content_tag :span, 'Não',  class: "label label-danger" unless value
+    return content_tag :span, 'Sim',  class: "label label-primary"
+  end
 end
