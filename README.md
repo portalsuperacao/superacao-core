@@ -4,6 +4,12 @@ This application handles the core elements of the methodology created by the Por
 
 It handles the matching, management of **overcomer** (patient) with his/her  **angel** (supporter) and support tickets to scale the platform in a self-managed way.
 
+# Documentation
+
+This project is using [swagger](http://swagger.io) for API documentation. The API uses [json-api](http://jsonapi.org/) standards, but the entities defined in the swagger does not reflect the json-api structure.
+
+To access documentation, accesse **swagger-ui** at `http://localhost:4444` and load the swagger schema file at `http://localhost:3000/swagger` 
+
 # Environments
 
 ## Dev
