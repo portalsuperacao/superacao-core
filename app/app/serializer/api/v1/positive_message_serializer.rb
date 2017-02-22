@@ -1,4 +1,4 @@
-class PositiveMessageSerializer < BaseSerializer
+class Api::V1::PositiveMessageSerializer < BaseSerializer
   attributes :name, :category, :image_thumb, :image_large
 
   def image_thumb

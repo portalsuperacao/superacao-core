@@ -1,4 +1,4 @@
-class PositiveMessagesController < BaseController
+class Api::V1::PositiveMessagesController < BaseController
   before_action :find_resource, only: [:show, :edit, :update, :destroy]
 
   # TODO: Authentication method for mobile app

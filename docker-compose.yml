@@ -37,3 +37,7 @@ services:
       - ./app:/usr/src/app
     env_file:
       - ./commons.env
+  swagger:
+    image: swaggerapi/swagger-ui
+    ports:
+      - '4444:8080'

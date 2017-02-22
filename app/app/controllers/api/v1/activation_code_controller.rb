@@ -1,5 +1,5 @@
-class ActivationCodeController < BaseController
-  before_action {authenticate(skip_set_current_user:true)}
+class Api::V1::ActivationCodeController < BaseController
+  before_action :authenticate, only: [:activate]
 
   def activate
     activation_code = ActivationCode.find_by_code(params[:code])
@@ -25,5 +25,14 @@ class ActivationCodeController < BaseController
       end
     end
 
+  end
+
+  def swagger
+    render json: File.read("lib/swagger/doc.json")
+  end
+
+  private
+  def authenticate
+    super(skip_set_current_user:true)
   end
 end
