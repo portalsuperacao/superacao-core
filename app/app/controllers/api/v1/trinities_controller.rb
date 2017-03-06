@@ -1,4 +1,4 @@
-class TrinitiesController < BaseController
+class Api::V1::TrinitiesController < BaseController
 
   def index
     render json: Trinity.all.page(params[:page])

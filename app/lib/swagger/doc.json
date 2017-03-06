@@ -1,0 +1,233 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API for Superação Core app.\n\n[Learn about ](http://www.portalsuperacao.org)\n",
+        "version": "0.0.1",
+        "title": "Superação Core",
+        "license": {
+            "name": "GNU GPL v3.0"
+        }
+    },
+    "paths": {
+        "/api/v1/participant/activate": {
+            "post": {
+                "description": "Based in the given activation code, the Participant from Firebase is linked to the existing Participant in the backend. \n",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "description": "Activation code of participant",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/Participant"
+                        }
+                    },
+                    "404": {
+                        "description": "Activation code not found"
+                    },
+                    "422": {
+                        "description": "Activation code already used"
+                    }
+                },
+                "security": [
+                    {
+                        "firebase_jwt": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/participants": {
+            "get": {
+                "description": "Returns array of `Participant` objects. \n",
+                "produces": [
+                    "application/json",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Search `Participant` by given name on its first and last name.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Type of `Participant`",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "Overcomer",
+                            "Angel",
+                            "Archangel"
+                        ]
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Pagination number",
+                        "required": false,
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Participant"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "firebase_jwt": []
+                    },
+                    {
+                        "devise": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/participants/{id}": {
+            "get": {
+                "description": "Return `Participant` objects. \n",
+                "produces": [
+                    "application/json",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of Participant that needs to be fetched",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/Participant"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "firebase_jwt": []
+                    },
+                    {
+                        "devise": []
+                    }
+                ]
+            },
+            "put": {
+                "description": "Update `Participant` objects. \n",
+                "produces": [
+                    "application/json",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of Participant that needs to be fetched",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/Participant"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "firebase_jwt": []
+                    },
+                    {
+                        "devise": []
+                    }
+                ]
+            },
+            "delete": {
+                "description": "Delete `Participant` objects. \n",
+                "produces": [
+                    "application/json",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID of Participant that needs to be fetched",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                },
+                "security": [
+                    {
+                        "firebase_jwt": []
+                    },
+                    {
+                        "devise": []
+                    }
+                ]
+            }
+        }
+    },
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "securityDefinitions": {
+        "firebase_jwt": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        },
+        "devise": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "definitions": {
+        "Participant": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "uid": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

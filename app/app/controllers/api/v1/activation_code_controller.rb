@@ -1,5 +1,5 @@
-class ActivationCodeController < BaseController
-  before_action {authenticate(skip_set_current_user:true)}
+class Api::V1::ActivationCodeController < BaseController
+  before_action :authenticate, only: [:activate]
 
   def activate
     activation_code = ActivationCode.find_by_code(params[:code])
@@ -25,5 +25,19 @@ class ActivationCodeController < BaseController
       end
     end
 
+  end
+
+  def swagger
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'
+    headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Accept, Authorization, Token'
+    headers['Access-Control-Max-Age'] = "1728000"
+    
+    render json: File.read("lib/swagger/doc.json")
+  end
+
+  private
+  def authenticate
+    super(skip_set_current_user:true)
   end
 end

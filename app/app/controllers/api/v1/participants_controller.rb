@@ -1,4 +1,4 @@
-class ParticipantsController < BaseController
+class Api::V1::ParticipantsController < BaseController
   before_action :authenticate, only: :trinities
 
   def index
@@ -20,6 +20,11 @@ class ParticipantsController < BaseController
   def show
     @participant = Participant.find(params[:id])
     @profile = @participant.profile
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @participant, include: 'participant_profile,current_treatment_profile,current_treatment_profile.treatments,current_treatment_profile.cancer_treatments,past_treatment_profile.treatments,past_treatment_profile.cancer_treatments'}
+    end
   end
 
   def new
