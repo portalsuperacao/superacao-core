@@ -1,10 +1,10 @@
 version: '2'
 services:
   app:
-    build: ./app
+    build: ./
     command: bundle exec rails s -p 3000 -b '0.0.0.0' -e development
     volumes:
-      - ./app:/usr/src/app
+      - ./:/usr/src/app
     links:
       - postgres
       - redis
@@ -14,13 +14,12 @@ services:
     tty: true
     env_file:
       - ./commons.env
-      - ./secrets.env
   postgres:
     image: postgres
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: superacao
+      POSTGRES_DB: superacao_development
       POSTGRES_USER: superacao
       POSTGRES_PASSWORD: 123456
   redis:
@@ -28,13 +27,13 @@ services:
     ports:
       - '6379:6379'
   sidekiq:
-    build: ./app
+    build: ./
     command: bundle exec sidekiq -C config/sidekiq.yml
     links:
       - postgres
       - redis
     volumes:
-      - ./app:/usr/src/app
+      - ./:/usr/src/app
     env_file:
       - ./commons.env
   swagger:

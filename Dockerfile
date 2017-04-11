@@ -13,7 +13,7 @@ COPY Gemfile.lock /usr/src/app/
 COPY . /usr/src/app
 RUN bundle install
 
-RUN apt-get update && apt-get install -y build-essential nodejs mysql-client libmysqlclient-dev --no-install-recommends
+RUN apt-get update && apt-get install -y build-essential nodejs --no-install-recommends
 
 EXPOSE 3000
 CMD ["rails", "server", "-b", "0.0.0.0"]

@@ -8,11 +8,16 @@ It handles the matching, management of **overcomer** (patient) with his/her  **a
 
 This project is using [swagger](http://swagger.io) for API documentation. The API uses [json-api](http://jsonapi.org/) standards, but the entities defined in the swagger does not reflect the json-api structure.
 
-To access documentation, accesse **swagger-ui** at `http://localhost:4444` and load the swagger schema file at `http://localhost:3000/swagger` 
+To access documentation, accesse **swagger-ui** at `http://localhost:4444` and load the swagger schema file at `http://localhost:3000/swagger`
 
 # Environments
 
 ## Dev
+
+### Init
+
+Run `./init_dev.sh` to initialize the environment before building the docker images.
+
 
 ### Google Cloud Platform
 
@@ -20,7 +25,7 @@ To access documentation, accesse **swagger-ui** at `http://localhost:4444` and l
 
 It's been used to upload images and make it available to the Firebase mobile app client. The same bucket is shared by Firebase and Google Cloud.  
 
-Create your account and place the keys in `commons.env` file.
+Create your account and place the keys in `commons.env` file. ( copy and rename template at commons.sample.env)
 
 ### Docker
 ```
@@ -34,7 +39,6 @@ $ docker exec -it <container-id> bash # to get container bash
 
 ```
 $ docker exec -it <app-container-id> bash
-$ rake db:create
 $ rake db:migrate
 $ rake db:seed
 ```
@@ -49,11 +53,12 @@ bundle_path=$(which bundle)
 sed -i -e "s/activate_bin_path/bin_path/g" $bundle_path
 ```
 
-# Contributors
-
+# Team members
 - [FIAP University](https://www.fiap.com.br) for supporting the development of mobile app
 - Gabriela Besser - Founder, product design, UI/UX
 - Michel Bottan - [@abmxer](http://github.com/abmxer)
+
+# Thanks to all contributors
 - Andreza Medeiros - [@andrezacm](http://github.com/andrezacm)
 - Victor Presumido - [@victorpre](http://github.com/victorpre)
 
