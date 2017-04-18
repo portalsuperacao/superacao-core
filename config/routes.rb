@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   resource :participant, controller: 'api/v1/participant',  only: [:show] do
-    post 'activate' , to: 'activation_code#activate'
+    post 'activate' , to: 'api/v1/activation_code#activate'
   end
 
   resources :positive_messages, controller: 'api/v1/positive_messages'
@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   end
 
   mount Sidekiq::Web => '/sidekiq'
-  
+
   get 'swagger', to: 'api/v1/activation_code#swagger'
   root to: "home#index"
 end
