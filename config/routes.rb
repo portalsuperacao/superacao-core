@@ -21,9 +21,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :participants, only: [:index, :new, :create, :show, :update, :destroy] do
-        resources :trinities, only: [:index, :new, :create, :show, :update, :destroy] do
-          get  'trinities',    to: 'participants#trinities'
+      scope :participant do
+        scope :trinity do
+          get  '',    to: 'participants#trinities'
           post 'custom-match', to: "trinities#custom_match"
         end
       end

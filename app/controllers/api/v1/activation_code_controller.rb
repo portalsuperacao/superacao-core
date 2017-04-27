@@ -32,7 +32,7 @@ class Api::V1::ActivationCodeController < BaseController
     headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'
     headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Accept, Authorization, Token'
     headers['Access-Control-Max-Age'] = "1728000"
-    
+
     render json: File.read("lib/swagger/doc.json")
   end
 

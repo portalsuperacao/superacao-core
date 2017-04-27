@@ -20,7 +20,8 @@
         <div class="ibox">
             <div class="ibox-title">
               <h5><%= participant_type @participant %></h5>
-              <!-- <span class="label label-primary pull-right">Ativo</span> -->
+              <span class="label <%= @participant.activation_code.activated ? 'label-default' : 'label-primary' %> pull-right"><%= @participant.activation_code.code %></span>
+              <span class="pull-right">Código ativação: </span>
             </div>
             <div class="ibox-title">
               <div class="profile-image">
@@ -40,6 +41,8 @@
                           <% if angel_or_overcomer @participant and ! @profile.blank? %>
                           <div class="label label-primary"><%= pacient @participant %></div>
                           <% end %>
+
+
                       </div>
                   </div>
               </div>
