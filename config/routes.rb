@@ -22,14 +22,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       scope :participant do
+        post 'activate' , to: 'activation_code#activate'
         scope :trinity do
           get  '',    to: 'participants#trinities'
           post 'custom-match', to: "trinities#custom_match"
         end
-      end
-
-      resource :participant, only: [:show] do
-        post 'activate' , to: 'activation_code#activate'
       end
 
       resources :positive_messages
