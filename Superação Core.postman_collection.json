@@ -1,0 +1,98 @@
+{
+	"id": "a4b055f4-4a0a-ec28-7ccc-d369d6dac7a9",
+	"name": "Superação Core",
+	"description": "",
+	"order": [],
+	"folders": [
+		{
+			"id": "befdd1da-de71-1d47-6645-a0337e055009",
+			"name": "Participant",
+			"description": "",
+			"order": [
+				"46bd9583-568b-409b-568c-cbe53663d3de"
+			],
+			"owner": 0
+		},
+		{
+			"id": "aeabba52-8e6d-ee30-29ce-839b911c5230",
+			"name": "Trinity",
+			"description": "",
+			"order": [
+				"f3b6198f-70b5-d4bc-3367-e71ce377d1aa",
+				"51e4ff06-dd53-352f-341b-ba9cef5d9199"
+			],
+			"owner": 0
+		}
+	],
+	"timestamp": 1476662720246,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "46bd9583-568b-409b-568c-cbe53663d3de",
+			"headers": "Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImJlYzYzMjdhZjI3N2ZkYmE5ZGQ3NGY3OGM1ODVkNzU2NTFhNTY0NjQifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc3VwZXJhY2FvLWRjNjJlIiwibmFtZSI6Ik1pY2hlbCBCb3R0YW4iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zY29udGVudC54eC5mYmNkbi5uZXQvdi90MS4wLTEvcDEwMHgxMDAvMTIzMjEyNjJfMTAxNTQwMDA1NDA1MDM4MTBfNjAzMjUzOTIzMzM3ODUyNzI3M19uLmpwZz9vaD0xNDY5MDlmNmM3YWM5YWQ5NDQ0MGI1ZWFlNTI4ODRjNiZvZT01OTE4QkY3OCIsImF1ZCI6InN1cGVyYWNhby1kYzYyZSIsImF1dGhfdGltZSI6MTQ5MzI0NzAxOSwidXNlcl9pZCI6ImxHazFnN1ZWNU5leE5KQU5nWnJ1d1c3Z01ybTEiLCJzdWIiOiJsR2sxZzdWVjVOZXhOSkFOZ1pydXdXN2dNcm0xIiwiaWF0IjoxNDkzMjQ3MDE5LCJleHAiOjE0OTMyNTA2MTksImVtYWlsIjoibWljaGVsLmJvdHRhbkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZmFjZWJvb2suY29tIjpbIjEwMTU0NDU5MjE3NjQzODEwIl0sImVtYWlsIjpbIm1pY2hlbC5ib3R0YW5AZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZmFjZWJvb2suY29tIn19.OIurBngAGrEigBp-bnkErYZwc1HCAw8Abqk1flSubgvwY6BznrAn2pTTOr5dj0Vyuj0Y4OBUMHlKYRKe7RzV1npRVGmygFRMVnmCdsJNL6f7OuuP_1rpct_XNxbeAd-Vfcz1n8vToFAwpE7J6fER13uGfKuBiJusRHuxbWntHRgRzJ0KJYsRivVqphDTNx1TLqxZ3-sm-FUYpVeQSH-QzwGnOaD-hkasT8ymVSllwZLFhikr7wzXtzu_DMKtqG9e7GnRUpo1GorFxs8u3RSrQxVYaJGqgEacZVs0Cs-jJ5iia8-op_e1cu6e6KO7e6jf6hsN8NRBs9K9hHp6jidsJQ\n",
+			"url": "http://localhost:3000/participant/activate",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "code",
+					"value": "IXANGMIX",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1493254059382,
+			"name": "Activate",
+			"description": "",
+			"collectionId": "a4b055f4-4a0a-ec28-7ccc-d369d6dac7a9",
+			"responses": []
+		},
+		{
+			"id": "51e4ff06-dd53-352f-341b-ba9cef5d9199",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:3000/api/v1/participant/trinity/custom-match",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1493253050073,
+			"name": "Custom Match",
+			"description": "",
+			"collectionId": "a4b055f4-4a0a-ec28-7ccc-d369d6dac7a9",
+			"responses": [],
+			"rawModeData": "{\"trinity\": {\n\"overcomer\": 1,\n\"angel\":2,\n\"archangel\":3\n}}"
+		},
+		{
+			"id": "f3b6198f-70b5-d4bc-3367-e71ce377d1aa",
+			"headers": "Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImJlYzYzMjdhZjI3N2ZkYmE5ZGQ3NGY3OGM1ODVkNzU2NTFhNTY0NjQifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vc3VwZXJhY2FvLWRjNjJlIiwibmFtZSI6Ik1pY2hlbCBCb3R0YW4iLCJwaWN0dXJlIjoiaHR0cHM6Ly9zY29udGVudC54eC5mYmNkbi5uZXQvdi90MS4wLTEvcDEwMHgxMDAvMTIzMjEyNjJfMTAxNTQwMDA1NDA1MDM4MTBfNjAzMjUzOTIzMzM3ODUyNzI3M19uLmpwZz9vaD0xNDY5MDlmNmM3YWM5YWQ5NDQ0MGI1ZWFlNTI4ODRjNiZvZT01OTE4QkY3OCIsImF1ZCI6InN1cGVyYWNhby1kYzYyZSIsImF1dGhfdGltZSI6MTQ5MzI1MjUxMywidXNlcl9pZCI6ImxHazFnN1ZWNU5leE5KQU5nWnJ1d1c3Z01ybTEiLCJzdWIiOiJsR2sxZzdWVjVOZXhOSkFOZ1pydXdXN2dNcm0xIiwiaWF0IjoxNDkzMjUyNTEzLCJleHAiOjE0OTMyNTYxMTMsImVtYWlsIjoibWljaGVsLmJvdHRhbkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZmFjZWJvb2suY29tIjpbIjEwMTU0NDU5MjE3NjQzODEwIl0sImVtYWlsIjpbIm1pY2hlbC5ib3R0YW5AZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZmFjZWJvb2suY29tIn19.Khb6FBi-Uq03Vs8sTKplbmYgfKIf9nVrl8hazbxUVE-pNlksC0EWg3XhwVqFgMUHEA9PQnI2iAaJ9ZYI4-hElBQyoJpMsMDYd38iLF2eQBy4228iIb-_l7dCY44MjJZIYKaq5hb9Y_IXdvm253PDzNkR_r67V25z3fIcMyVZ79vRykLLbbvvyueUDaBJRAImRCrGjZgCRpidmN3LSV8cd4-M7fH7wqqr4uNAOvGnSNOa7gnMoVThKK2ttOVDrgU4Azaz7ibb3VRVp4nDfoOKhqsY7kXCG1kcCipz30QkvnkuSH1-ad3Vj6riJYe6quXtygPm8VQtHb-QevTJxZLluA\n",
+			"url": "http://localhost:3000/api/v1/participant/trinity",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1493252674785,
+			"name": "Trinity",
+			"description": "",
+			"collectionId": "a4b055f4-4a0a-ec28-7ccc-d369d6dac7a9",
+			"responses": [],
+			"folder": "aeabba52-8e6d-ee30-29ce-839b911c5230"
+		}
+	]
+}
