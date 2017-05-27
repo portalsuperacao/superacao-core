@@ -2,8 +2,6 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
 
   resources :participants, controller: 'api/v1/participants', only: [:index, :new, :create, :show, :update, :destroy] do
     resources :trinities, controller: 'api/v1/trinities', only: [:index, :new, :create, :show, :update, :destroy] do
@@ -26,6 +24,7 @@ Rails.application.routes.draw do
         scope :trinity do
           get  '',    to: 'participants#trinities'
           post 'custom-match', to: "trinities#custom_match"
+          get  'match', to: "trinities#match"
         end
       end
 
