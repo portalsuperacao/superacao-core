@@ -54,11 +54,16 @@ class Api::V1::ParticipantsController < BaseController
   end
 
   def create_app
-    byebug
-    pariticipant_type = params["participant_profile"]["participant_type"]
-    participant = Object.const_get(pariticipant_type.capitalize).new
+    participant_type = params["participant_profile"]["participant_type"]
+    participant = Object.const_get(participant_type.capitalize).new
     participant_profile = ParticipantProfile.create(participant_profile_params)
     participant.participant_profile = participant_profile
+
+    if participant.save
+      head :created
+    else
+      head :unprocessable_entity
+    end
   end
 
   private
