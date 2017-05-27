@@ -1,5 +1,5 @@
 class Api::V1::ParticipantsController < BaseController
-  before_action :authenticate, only: :trinities
+  before_action :authenticate, only: [:trinities, :show_app]
 
   def index
     @participants = Participant.joins(:participant_profile).includes(:participant_profile)
@@ -44,6 +44,13 @@ class Api::V1::ParticipantsController < BaseController
   # APP  endpoints
   def trinities
     render json: @current_user.trinities, include: 'overcomer,angel,archangel'
+  end
+
+  def show_app
+    @participant = Participant.find_by(uid: @current_uid)
+    @profile = @participant.profile
+
+    render json: @participant, include: 'participant_profile,current_treatment_profile,current_treatment_profile.treatments,current_treatment_profile.cancer_treatments,past_treatment_profile.treatments,past_treatment_profile.cancer_treatments'
   end
 
   def create_app

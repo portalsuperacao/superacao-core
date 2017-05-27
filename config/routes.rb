@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       scope :participant do
+        get '', to: 'participants#show_app'
         post '', to: 'participants#create_app'
         post 'activate' , to: 'activation_code#activate'
         scope :trinity do
