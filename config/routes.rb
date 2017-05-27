@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       scope :participant do
+        post '', to: 'participants#create_app'
         post 'activate' , to: 'activation_code#activate'
         scope :trinity do
           get  '',    to: 'participants#trinities'
@@ -28,6 +29,8 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :treatment_types, only: [:index]
+      resources :cancer_types, only: [:index]
       resources :positive_messages
     end
   end
