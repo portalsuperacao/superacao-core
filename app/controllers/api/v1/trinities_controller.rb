@@ -26,4 +26,8 @@ class Api::V1::TrinitiesController < BaseController
     flash.keep
     render js: "window.location = '#{participant_path(trinity.overcomer)}'"
   end
+
+  def match
+    render json: Angel.all.sample, include: 'participant_profile,current_treatment_profile,current_treatment_profile.treatments,current_treatment_profile.cancer_treatments,past_treatment_profile.treatments,past_treatment_profile.cancer_treatments'
+  end
 end

@@ -48,6 +48,7 @@ def treatment_profiles(participant)
     participant.myself!
   else
     participant.family_member!
+    participant.family_member = participant.family_members.to_a.sample(1).to_h.first[0]
   end
 
   if [true, false].sample

@@ -2,10 +2,8 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-
-  resources :participants, controller: 'api/v1/participants', only: [:index, :new, :create, :show, :update, :destroy] do
+  resources :participants,  only: [:index, :new, :create, :show, :update, :destroy] do
     resources :trinities, controller: 'api/v1/trinities', only: [:index, :new, :create, :show, :update, :destroy] do
       get  'trinities',    to: 'participants#trinities'
       post 'custom-match', to: "trinities#custom_match"
@@ -22,13 +20,18 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       scope :participant do
+        get '', to: 'participants#show'
+        post '', to: 'participants#create'
         post 'activate' , to: 'activation_code#activate'
         scope :trinity do
           get  '',    to: 'participants#trinities'
           post 'custom-match', to: "trinities#custom_match"
+          get  'match', to: "trinities#match"
         end
       end
 
+      resources :treatment_types, only: [:index]
+      resources :cancer_types, only: [:index]
       resources :positive_messages
     end
   end
