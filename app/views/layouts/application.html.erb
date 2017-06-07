@@ -18,8 +18,9 @@
     <script>
         <% flash.each do | key, value | %>
           setTimeout((function() {
+             toastr.options.progressBar = true;
              toastr.<%=key%>("<%=value%>")
-          }), 300);
+          }), 1000);
         <% end %>
     </script>
 

@@ -5,7 +5,7 @@
 #  id             :integer          not null, primary key
 #  code           :string
 #  activated      :boolean
-#  activated_at   :date
+#  activated_at   :datetime
 #  participant_id :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

@@ -16,4 +16,6 @@ class TreatmentProfile < ApplicationRecord
   belongs_to :participant
   has_many :treatments, as: :treatable
   has_many :cancer_treatments, as: :cancerous
+
+  accepts_nested_attributes_for :treatments, :cancer_treatments
 end

@@ -3,7 +3,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :participants, controller: 'api/v1/participants', only: [:index, :new, :create, :show, :update, :destroy] do
+  resources :participants,  only: [:index, :new, :create, :show, :update, :destroy] do
     resources :trinities, controller: 'api/v1/trinities', only: [:index, :new, :create, :show, :update, :destroy] do
       get  'trinities',    to: 'participants#trinities'
       post 'custom-match', to: "trinities#custom_match"
@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       scope :participant do
-        get '', to: 'participants#show_app'
-        post '', to: 'participants#create_app'
+        get '', to: 'participants#show'
+        post '', to: 'participants#create'
         post 'activate' , to: 'activation_code#activate'
         scope :trinity do
           get  '',    to: 'participants#trinities'

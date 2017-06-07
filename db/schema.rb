@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210000532) do
+ActiveRecord::Schema.define(version: 20170606234120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,11 +86,13 @@ ActiveRecord::Schema.define(version: 20170210000532) do
     t.string   "youtube"
     t.string   "snapchat"
     t.integer  "participant_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "genre"
     t.string   "email"
     t.string   "belief"
+    t.text     "healing_quote"
+    t.string   "difficulty_quote"
     t.index ["participant_id"], name: "index_participant_profiles_on_participant_id", using: :btree
   end
 
@@ -105,6 +107,7 @@ ActiveRecord::Schema.define(version: 20170210000532) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "family_member"
   end
 
   create_table "positive_messages", force: :cascade do |t|

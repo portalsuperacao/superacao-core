@@ -9,7 +9,9 @@
 			"name": "Participant",
 			"description": "",
 			"order": [
-				"46bd9583-568b-409b-568c-cbe53663d3de"
+				"46bd9583-568b-409b-568c-cbe53663d3de",
+				"715cde19-596c-d3b0-651c-a1ca66d5a0bc",
+				"73ef2d84-6c16-e1d2-71d4-47d4c331a683"
 			],
 			"owner": 0
 		},
@@ -19,7 +21,8 @@
 			"description": "",
 			"order": [
 				"f3b6198f-70b5-d4bc-3367-e71ce377d1aa",
-				"51e4ff06-dd53-352f-341b-ba9cef5d9199"
+				"51e4ff06-dd53-352f-341b-ba9cef5d9199",
+				"5f50e4f1-013c-6aeb-d421-83dca2be173e"
 			],
 			"owner": 0
 		}
@@ -73,6 +76,78 @@
 			"collectionId": "a4b055f4-4a0a-ec28-7ccc-d369d6dac7a9",
 			"responses": [],
 			"rawModeData": "{\"trinity\": {\n\"overcomer\": 1,\n\"angel\":2,\n\"archangel\":3\n}}"
+		},
+		{
+			"id": "5f50e4f1-013c-6aeb-d421-83dca2be173e",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:3000/api/v1/participant/trinity/custom-match",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1493253050073,
+			"name": "Custom Match copy",
+			"description": "",
+			"collectionId": "a4b055f4-4a0a-ec28-7ccc-d369d6dac7a9",
+			"responses": [],
+			"folder": "aeabba52-8e6d-ee30-29ce-839b911c5230",
+			"rawModeData": "{\"trinity\": {\n\"overcomer\": 1,\n\"angel\":2,\n\"archangel\":3\n}}"
+		},
+		{
+			"id": "715cde19-596c-d3b0-651c-a1ca66d5a0bc",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/api/v1/participant.json",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496768359246,
+			"name": "Create Participant",
+			"description": "",
+			"collectionId": "a4b055f4-4a0a-ec28-7ccc-d369d6dac7a9",
+			"responses": [],
+			"rawModeData": "{\n   \"participant\":{\n\t    \"type\":\"angel\",\n      \"pacient\":\"pacient\",\n      \"cancer_status\":\"during_treatment\",\n      \"participant_profile_attributes\":{\n         \"first_name\":\"Matheus\",\n         \"last_name\":\"Melo\",\n         \"birthdate\":\"10/10/1980\",\n         \"occupation\":\"Direct Configuration Specialist\",\n         \"country\":\"Bermuda\",\n         \"state\":\"Distrito Federal\",\n         \"city\":\"Víctorde Nossa Senhora\",\n         \"relationship\":\"Solteira\",\n         \"sons\":5,\n         \"facebook\":\"http://hammes.name/ilene\",\n         \"instagram\":\"http://mayerstiedemann.net/sven_stracke\",\n         \"whatsapp\":\"http://eichmann.info/melya.bosco\",\n         \"youtube\":\"http://koch.name/rickie.gislason\",\n         \"snapchat\":\"http://shields.io/warren_monahan\",\n         \"participant_id\":9,\n         \"genre\":\"male\",\n         \"email\":\"norberto@kuhic.name\",\n         \"belief\":\"Colombo Powder\"\n      },\n      \"past_treatment_profile_attributes\":{\n         \"metastasis\":\"true\",\n         \"relapse\":\"true\",\n         \"treatments_attributes\":[\n            {\n               \"status\":\"done\",\n               \"treatment_type_id\":3,\n               \"treatable_type\":\"TreatmentProfile\"\n            },\n            {\n               \"status\":\"done\",\n               \"treatment_type_id\":3,\n               \"treatable_type\":\"TreatmentProfile\"\n            }\n         ],\n         \"cancer_treatments_attributes\":[\n            {\n               \"cancer_type_id\":1,\n               \"cancerous_type\":\"TreatmentProfile\"\n            },\n            {\n               \"cancer_type_id\":3,\n               \"cancerous_type\":\"TreatmentProfile\"\n            }\n         ]\n      },\n      \"current_treatment_profile_attributes\":{\n         \"metastasis\":true,\n         \"relapse\":true,\n         \"treatments_attributes\":[\n            {\n               \"status\":\"done\",\n               \"treatment_type_id\":3,\n               \"treatable_type\":\"TreatmentProfile\"\n            },\n            {\n               \"status\":\"done\",\n               \"treatment_type_id\":3,\n               \"treatable_type\":\"TreatmentProfile\"\n            }\n         ],\n         \"cancer_treatments_attributes\":[\n            {\n               \"cancer_type_id\":2,\n               \"cancerous_type\":\"TreatmentProfile\"\n            },\n            {\n               \"cancer_type_id\":1,\n               \"cancerous_type\":\"TreatmentProfile\"\n            }\n         ]\n      }\n   }\n}"
+		},
+		{
+			"id": "73ef2d84-6c16-e1d2-71d4-47d4c331a683",
+			"headers": "",
+			"url": "http://localhost:3000/api/v1/participant",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "a4b055f4-4a0a-ec28-7ccc-d369d6dac7a9",
+			"data": null,
+			"dataMode": "params",
+			"name": "Read Participant",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1495922811156,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "befdd1da-de71-1d47-6645-a0337e055009"
 		},
 		{
 			"id": "f3b6198f-70b5-d4bc-3367-e71ce377d1aa",
