@@ -2,6 +2,9 @@ FactoryGirl.define do
   factory :participant do
     participant_profile
 
+    pacient :pacient
+    cancer_status :overcome
+
     factory :overcomer, class: Overcomer do
       sequence(:uid, 1) { |n| "overcomer_#{n}" }
     end
