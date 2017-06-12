@@ -22,6 +22,10 @@ class ParticipantsController < BaseController
     @participant.build_participant_profile
   end
 
+  def create
+    create_participant
+  end
+
   def show
     show_participant(Participant.find(params[:id]))
   end

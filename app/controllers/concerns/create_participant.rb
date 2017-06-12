@@ -3,9 +3,10 @@ require 'active_support/concern'
 module CreateParticipant
   extend ActiveSupport::Concern
 
-  def create
+  def create_participant(link_firebase_user = false)
     participant_type = params["participant"]["type"]
     @participant = Object.const_get(participant_type.capitalize).create(participant_params)
+    @participant.uid = @current_uid if link_firebase_user
 
     if @participant.save
       respond_to do |format|
