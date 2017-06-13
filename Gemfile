@@ -3,12 +3,12 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails', '~> 5.1.1'
 gem 'pg'
 
 gem 'bootstrap-sass', '~> 3.3.7'
 
-gem 'font-awesome-rails', '4.7.0.1'
+gem 'font-awesome-rails'
 
 gem 'devise'
 # Use Puma as the app server
