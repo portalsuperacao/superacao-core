@@ -18,26 +18,28 @@
 
 class Participant < ApplicationRecord
   include PgSearch
+  extend Enumerize
 
   alias_attribute :profile, :participant_profile
-  enum pacient: [:pacient, :family_member]
-  enum family_member: [:son, :father, :mother, :brother, :sister, :cousin, :uncle,
+
+  enumerize :pacient, in: [:pacient, :family_member]
+  enumerize :family_member, in: [:son, :father, :mother, :brother, :sister, :cousin, :uncle,
                       :grandmother, :grandfather, :aunt]
-  enum cancer_status: [:overcome, :during_treatment]
+  enumerize :cancer_status, in: [:overcome, :during_treatment]
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" },
                      default_url: lambda { |attach| "/images/:style/#{attach.instance.participant_profile.genre}_participant.png"}
   validates :uid, uniqueness: true, allow_nil: false, if: 'uid.present?'
-  validates :family_member, presence: true, allow_nil: false, if: 'self.family_member?'
+  validates :family_member, presence: true, allow_nil: false, if: 'family_member.present?'
   validates :pacient, :cancer_status, presence: true
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
-  has_one :activation_code
-  has_one :participant_profile
-  has_one :current_treatment_profile, class_name: 'TreatmentProfile', foreign_key: 'current_participant_id'
-  has_one :past_treatment_profile, class_name: 'TreatmentProfile', foreign_key: 'past_participant_id'
-  has_many :missions
+  has_one :activation_code, dependent: :destroy
+  has_one :participant_profile, dependent: :destroy
+  has_one :current_treatment_profile, class_name: 'TreatmentProfile', foreign_key: 'current_participant_id', dependent: :destroy
+  has_one :past_treatment_profile, class_name: 'TreatmentProfile', foreign_key: 'past_participant_id', dependent: :destroy
+  has_many :missions, dependent: :destroy
 
   pg_search_scope :search_by_full_name,
                   :associated_against => {
@@ -48,6 +50,10 @@ class Participant < ApplicationRecord
 
   accepts_nested_attributes_for :participant_profile, :current_treatment_profile,
                                 :past_treatment_profile
+
+  scope :overcomers, -> { where(type: 'Overcomer') }
+  scope :angels, -> { where(type: 'Angel') }
+  scope :archangels, -> { where(type: 'Archangel') }
 
   def is_overcomer_and_has_no_trinity
     self.is_a? Overcomer and !active_trinities.any?

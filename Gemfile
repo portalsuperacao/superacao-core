@@ -38,6 +38,8 @@ gem 'active_link_to'
 gem 'sidekiq'
 gem 'fog'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'enumerize'
+gem 'country_select'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

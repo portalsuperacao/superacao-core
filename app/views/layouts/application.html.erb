@@ -16,10 +16,11 @@
 </head>
 <body>
     <script>
-        <% flash.each do | key, value | %>
+        <% flash.each do | key, value | byebug %>
           setTimeout((function() {
              toastr.options.progressBar = true;
-             toastr.<%=key%>("<%=value%>")
+             toastr.options.escapeHtml = false;
+             toastr.<%=key%>("<%= value.join('<br/>').html_safe %>")
           }), 1000);
         <% end %>
     </script>

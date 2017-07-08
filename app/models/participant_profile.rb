@@ -30,12 +30,16 @@
 #
 
 class ParticipantProfile < ApplicationRecord
+  extend Enumerize
 
-enum genre: [:male, :female, :other]
+  enumerize :genre, in: [:male, :female, :other]
 
-belongs_to :participant, optional: true
+  belongs_to :participant, optional: true
 
-attr_accessor :participant_type
+  attr_accessor :participant_type
+
+  validates :first_name, :last_name, :birthdate, :occupation, :country,
+   :state, :city, :relationship, :sons, :email, :belief, presence: true
 
   def name
     "#{first_name} #{last_name}"
