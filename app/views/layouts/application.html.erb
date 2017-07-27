@@ -11,15 +11,26 @@
 
     <!-- Main javascript files -->
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_pack_tag 'application' %>
     <%= csrf_meta_tags %>
 
 </head>
 <body>
     <script>
-        <% flash.each do | key, value | %>
+        <%
+        messages = {
+          warning: 'Verifique os erros abaixo.'
+        }
+        flash.each do | key, value |
+        %>
           setTimeout((function() {
              toastr.options.progressBar = true;
-             toastr.<%=key%>("<%=value%>")
+
+             <% if messages.key? key.to_sym %>
+             toastr.<%=key%>("<%= messages[key.to_sym]  %>")
+             <% else  %>
+             toastr.<%=key%>("<%= value   %>")
+             <% end %>
           }), 1000);
         <% end %>
     </script>

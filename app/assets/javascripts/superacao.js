@@ -1,5 +1,16 @@
 
 $(document).ready(function () {
+
+  $("#new_participant input[name='participant[pacient]']").change(function () {
+          var type = $(this).val();
+          console.log(type)
+          if (type == "family_member") {
+            $("#participant_family").fadeIn();
+          } else {
+            $("#participant_family").fadeOut();
+          }
+  });
+
   $('.delete-action').click(function () {
       var action_url = $(this).data('action')
       var success_redirect = $(this).data('success-redirect')

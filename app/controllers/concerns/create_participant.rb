@@ -4,8 +4,7 @@ module CreateParticipant
   extend ActiveSupport::Concern
 
   def create_participant(link_firebase_user = false)
-    participant_type = params["participant"]["type"]
-    @participant = Object.const_get(participant_type.capitalize).create(participant_params)
+    @participant = Participant.new(participant_params)
     @participant.uid = @current_uid if link_firebase_user
 
     if @participant.save
@@ -20,7 +19,7 @@ module CreateParticipant
     else
       respond_to do |format|
         format.html {
-          flash[:warning] = @participant.errors.full_messages.to_sentence
+          flash[:warning] = @participant.errors.full_messages
           render :new
         }
         format.json {
@@ -41,16 +40,26 @@ module CreateParticipant
   end
 
   private
+
+  def participant_type
+    types = ['participant', 'overcomer', 'angel', 'archangel']
+    (params.keys & types).first.to_sym
+  end
+
   def participant_params
-    params.require(:participant).permit(:pacient, :cancer_status,
+    p = params.require(participant_type).permit(:pacient, :cancer_status, :type, :family_member,
     participant_profile_attributes: [:first_name,:last_name ,
     :birthdate, :occupation, :city, :state, :country,
-    :facebook, :instagram, :whatsapp, :youtube, :snapchat],
+    :facebook, :instagram, :whatsapp, :youtube, :snapchat, :relationship, :sons,
+    :genre, :email, :belief],
     past_treatment_profile_attributes: [ :metastasis,:relapse,
       { treatments_attributes: [ :status, :treatment_type_id, :treatable_type ] },
       { cancer_treatments_attributes: [ :cancer_type_id, :cancerous_type ] } ],
     current_treatment_profile_attributes: [ :metastasis,:relapse,
       { treatments_attributes: [ :status, :treatment_type_id, :treatable_type ] },
       { cancer_treatments_attributes: [ :cancer_type_id, :cancerous_type ] }])
+
+   p['type'] = p['type'].camelcase
+   p
   end
 end

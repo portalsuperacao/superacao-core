@@ -19,3 +19,5 @@ commons.env
 #Ignore database.yml
 config/database.yml
 app/public/system
+/public/packs
+/node_modules

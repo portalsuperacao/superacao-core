@@ -2,10 +2,47 @@
 pt-BR:
   active: Ativo
   archived: Arquivado
+  enumerize:
+    participant:
+      pacient:
+        pacient: Paciente
+        family_member: Familiar
+      cancer_status:
+        overcome: Superou
+        during_treatment: Em tratamento
+      family_member:
+        son: Filho
+        father: Pai
+        mother: Mãe
+        brother: Irmão
+        sister: Irmã
+        cousin: Primo
+        uncle: Tio
+        aunt: Tia
+        grandmother: Avó
+        grandfather: Avô
+  simple_form:
+    labels:
+      participant:
+        type: Tipo participante
+        pacient: Tipo paciente
+        family_member: Tipo Familiar
+        cancer_status: Status do câncer
+        participant_profile:
+          first_name: Nome
+          last_name: Sobrenome
+          occupation: Profissão
+          belief: Religião
+          healing_quote: Frase de força
+          genre: Gênero
+          city: Cidade
+          state: Estado
+          country: País
+          sons: Filhos
+
   activerecord:
     errors:
       messages:
-        record_invalid: 'A validação falhou: %{errors}'
         restrict_dependent_destroy:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
