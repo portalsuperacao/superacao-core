@@ -17,11 +17,20 @@
 </head>
 <body>
     <script>
-        <% flash.each do | key, value | byebug %>
+        <%
+        messages = {
+          warning: 'Verifique os erros abaixo.'
+        }
+        flash.each do | key, value |
+        %>
           setTimeout((function() {
              toastr.options.progressBar = true;
-             toastr.options.escapeHtml = false;
-             toastr.<%=key%>("<%= value.join('<br/>').html_safe %>")
+
+             <% if messages.key? key.to_sym %>
+             toastr.<%=key%>("<%= messages[key.to_sym]  %>")
+             <% else  %>
+             toastr.<%=key%>("<%= value   %>")
+             <% end %>
           }), 1000);
         <% end %>
     </script>

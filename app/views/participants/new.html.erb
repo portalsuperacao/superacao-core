@@ -7,7 +7,7 @@
         <div class="ibox-title"><h5>Criar Participante</h5></div>
         <div class="ibox-content">
           <%= simple_form_for @participant, url: participants_path,
-              html: {class: 'form-horizontal'}, wrapper: :horizontal_form,
+              html: {class: 'form-horizontal', id: 'new_participant'}, wrapper: :horizontal_form,
               wrapper_mappings: {
                 check_boxes: :horizontal_radio_and_checkboxes,
                 radio_buttons: :horizontal_radio_and_checkboxes,
@@ -22,8 +22,11 @@
           <div class="hr-line-dashed"></div>
           <%= f.input :pacient, as: :radio_buttons, item_wrapper_class: 'checkbox-inline' %>
           <div class="hr-line-dashed"></div>
-          <%= f.input :family_member %>
-          <div class="hr-line-dashed"></div>
+
+          <div id="participant_family">
+            <%= f.input :family_member %>
+            <div class="hr-line-dashed"></div>
+          </div>
 
           <%= f.simple_fields_for :participant_profile do |pf| %>
             <%= pf.input :genre  %>
@@ -90,7 +93,7 @@
             <% end %>
             <div class="hr-line-dashed"></div>
             <div class="row form-group">
-              <div class="col-sm-4 col-sm-offset-8">
+              <div class="col-sm-12">
                 <%= f.submit "Salvar participante", :class =>"btn btn-primary"%>
                 <%= button_tag "Limpar dados", type: :reset, :class =>"btn btn-white" %>
               </div>
