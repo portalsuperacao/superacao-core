@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     post 'activate' , to: 'api/v1/activation_code#activate'
   end
 
-  resources :positive_messages, controller: 'api/v1/positive_messages'
+  resources :positive_messages
 
 
   namespace :api do
